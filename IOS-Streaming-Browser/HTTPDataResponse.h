@@ -1,7 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "HTTPResponse.h"
 
-// Implements HTTPResponse protocol
+/**
+    @brief Class for handling an HTTP Data Response
+    Implements HTTPResponse protocol
+**/
 @interface HTTPDataResponse : NSObject <HTTPResponse>
 {
 

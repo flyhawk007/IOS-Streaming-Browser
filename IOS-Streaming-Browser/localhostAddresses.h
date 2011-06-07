@@ -21,7 +21,9 @@
 
 #import <Foundation/Foundation.h>
 
-
+/**
+    @brief Sends notification when the local address is resolved
+**/
 @interface localhostAddresses : NSObject {
 
 }

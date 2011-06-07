@@ -18,7 +18,7 @@
 
 
 /** 
- *
+ * @brief DDRange is the functional equivalent of a 64 bit NSRange.
  * \struct _DDRange
  *
  * \brief 

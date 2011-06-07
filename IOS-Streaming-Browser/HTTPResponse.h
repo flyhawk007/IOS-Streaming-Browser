@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 
-
+/**
+    @brief Protocol which responses inherit and implement
+**/
 @protocol HTTPResponse
 
 /**

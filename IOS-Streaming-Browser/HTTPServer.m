@@ -61,9 +61,10 @@
 		// Initialize underlying dispatch queue and GCD based tcp socket
 		serverQueue = dispatch_queue_create("HTTPServer", NULL);
         
-        // create an asynchronous socket and initialize with the HTTPServer as the delegate, and the serverQueue as the delegate queue
+        // create an asynchronous socket and initialize with the HTTPServer as the delegate, and the serverQueue as the delegate queue.  This means the HTTPServer will be handling all request for the socket, and the serverQueue will be the designated queue
 		asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
 		
+        
 		// Use default connection class of HTTPConnection.  
 		connectionQueue = dispatch_queue_create("HTTPConnection", NULL);
 
@@ -79,7 +80,7 @@
 		
 		// Configure default values for bonjour service
 		
-		// Bonjour domain. Use the local domain by default
+		// Bonjour domain. Use the local domain by default. We are setting the bonjour domain for peer-to-peer connections
 		domain = @"local.";
 		
 		// If using an empty string ("") for the service name when registering,
@@ -88,32 +89,31 @@
 		// by automatically appending a digit to the end of the name.
 		name = @"";
 		
-		// Initialize arrays to hold all the normal and webSocket connections
+		// Initialize arrays to hold all the normal connections
 		connections = [[NSMutableArray alloc] init];
         
         // Initialize array to hold the web socket connections
 		webSockets  = [[NSMutableArray alloc] init];
 		
         
-        // Initialize locks for the normal and websocket connections
+        // Initialize locks for the normal connections
 		connectionsLock = [[NSLock alloc] init];
+        
+        // Initialize locks for websocket connections
 		webSocketsLock  = [[NSLock alloc] init];
-		
         
         
-		// Register for notifications of closed connections.  This will notify self when an http connection dies
+		// Register for notifications of closed connections.  This will notify the HTTPServer (i.e. self) when an http connection dies
 		[[NSNotificationCenter defaultCenter] addObserver:self
                     selector:@selector(connectionDidDie:)
                     name:HTTPConnectionDidDieNotification
                     object:nil];
 		
-		// Register for notifications of closed websocket connections.  This will notify self when a web socket dies
+		// Register for notifications of closed websocket connections.  This will notify the HTTPServer (i.e. self) when a web socket dies
 		[[NSNotificationCenter defaultCenter] addObserver:self
                     selector:@selector(webSocketDidDie:)
                     name:WebSocketDidDieNotification
                     object:nil];
-		
-        
         
         // Note: Just initialized the HTTPServer, have not started it yet
 		isRunning = NO;
@@ -129,7 +129,6 @@
 **/
 - (void)dealloc
 {
-
 	
 	// Remove notification observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -702,7 +701,7 @@
 
 
 /**
-    @brief Whether the server is running
+    @brief Whether the HTTP server is running
     @return BOOL
 **/
 - (BOOL)isRunning
@@ -720,7 +719,7 @@
 
 
 /**
-    @brief Adds a web sockets array
+    @brief Adds a web sockets to the webSockets array
     @param WebSocket
     @return void
 **/
@@ -900,7 +899,7 @@
 }
 
 /**
-    @brief Unpublic the Bonjour service
+    @brief Unpublish the Bonjour service
     @return void
 **/
 - (void)unpublishBonjour

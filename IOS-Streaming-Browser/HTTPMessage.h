@@ -13,7 +13,7 @@
 #define HTTPVersion1_1  ((NSString *)kCFHTTPVersion1_1)
 
 /**
-    HTTPMessage
+    @brief Class for HTTP Messages
 **/
 @interface HTTPMessage : NSObject
 {

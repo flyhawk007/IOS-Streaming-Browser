@@ -3,7 +3,10 @@
 
 @class HTTPConnection;
 
-// Implements HTTPResponse protocol
+/**
+    @brief Class for handling HTTP file response
+    Implements HTTPResponse protocol
+**/
 @interface HTTPFileResponse : NSObject <HTTPResponse>
 {
     

@@ -34,7 +34,9 @@
  * This class is also asynchronous, so it will perform the file IO using its own GCD queue.
 **/
 
-
+/**
+    @brief For creating dynamic content
+**/
 @interface HTTPDynamicFileResponse : HTTPAsyncFileResponse
 {
     /**

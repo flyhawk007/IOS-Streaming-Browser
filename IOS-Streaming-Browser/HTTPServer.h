@@ -18,7 +18,7 @@
 #endif
 
 /**
-    The HTTP Server
+    @brief An HTTP server
 **/
 @interface HTTPServer : NSObject IMPLEMENTED_PROTOCOLS
 {

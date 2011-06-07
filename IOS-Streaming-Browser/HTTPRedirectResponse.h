@@ -1,8 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "HTTPResponse.h"
 
-
-// Implements HTTPResponse protocol
+/**
+    @brief Class for handling and HTTP redirect response
+    Implements HTTPResponse protocol
+**/
 @interface HTTPRedirectResponse : NSObject <HTTPResponse>
 {
     /**

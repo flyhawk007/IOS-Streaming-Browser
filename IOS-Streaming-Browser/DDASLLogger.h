@@ -26,10 +26,14 @@
  * you may choose to use a file logger and a tty logger.
 **/
 
+
+/**
+    @brief Apple System Logger 
+**/
 @interface DDASLLogger : DDAbstractLogger <DDLogger>
 {
     /**
-     
+        @brief Interface to the Apple System Logs
     **/
 	aslclient client;
 }

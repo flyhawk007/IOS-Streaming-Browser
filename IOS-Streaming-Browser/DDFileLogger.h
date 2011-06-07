@@ -120,17 +120,17 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Default log file manager.
-// 
-// All log files are placed inside the logsDirectory.
-// On Mac, this is in ~/Library/Application Support/<Application Name>/Logs.
-// On iPhone, this is in ~/Documents/Logs.
-// 
-// Log files are named "log-<uuid>.txt",
-// where uuid is a 6 character hexadecimal consisting of the set [0123456789ABCDEF].
-// 
-// Archived log files are automatically deleted according to the maximumNumberOfLogFiles property.
+/**
+    @brief Default log file manager.
 
+    All log files are placed inside the logsDirectory.
+    On Mac, this is in ~/Library/Application Support/<Application Name>/Logs.
+    On iPhone, this is in ~/Documents/Logs.
+ 
+    Log files are named "log-<uuid>.txt", where uuid is a 6 character hexadecimal consisting of the set [0123456789ABCDEF].
+
+    Archived log files are automatically deleted according to the maximumNumberOfLogFiles property.
+**/
 @interface DDLogFileManagerDefault : NSObject <DDLogFileManager>
 {
     /**
@@ -145,15 +145,14 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Most users will want file log messages to be prepended with the date and time.
-// Rather than forcing the majority of users to write their own formatter,
-// we will supply a logical default formatter.
-// Users can easily replace this formatter with their own by invoking the setLogFormatter method.
-// It can also be removed by calling setLogFormatter, and passing a nil parameter.
-// 
-// In addition to the convenience of having a logical default formatter,
-// it will also provide a template that makes it easy for developers to copy and change.
-
+/**
+    @brief Most users will want file log messages to be prepended with the date and time.
+    Rather than forcing the majority of users to write their own formatter, we will supply a logical default formatter.
+    Users can easily replace this formatter with their own by invoking the setLogFormatter method.
+    It can also be removed by calling setLogFormatter, and passing a nil parameter.
+    
+    In addition to the convenience of having a logical default formatter, it will also provide a template that makes it easy for developers to copy and change.
+**/
 @interface DDLogFileFormatterDefault : NSObject <DDLogFormatter>
 {
     /**
@@ -168,6 +167,9 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+    @brief Logs information to a file
+**/
 @interface DDFileLogger : DDAbstractLogger <DDLogger>
 {
     /**

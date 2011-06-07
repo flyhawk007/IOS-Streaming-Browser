@@ -138,6 +138,9 @@ NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2)
 	return NSOrderedSame;
 }
 
+/**
+    @brief An NSValue object is a simple container for a single C or Objective-C data item. It can hold any of the scalar types such as int, float, and char, as well as pointers, structures, and object ids.
+**/
 @implementation NSValue (NSValueDDRangeExtensions)
 
 /**

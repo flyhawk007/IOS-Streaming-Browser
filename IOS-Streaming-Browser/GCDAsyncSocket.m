@@ -10,9 +10,13 @@
 
 #import "GCDAsyncSocket.h"
 
+///////////////////////////////////////////
+// If for the IPHONE
+///////////////////////////////////////////
 #if TARGET_OS_IPHONE
   #import <CFNetwork/CFNetwork.h>
 #endif
+
 
 #import <arpa/inet.h> // definitions for internet operations
 #import <fcntl.h> // file control options
@@ -29,10 +33,15 @@
 #import <sys/uio.h> // definitions for vector I/O operations
 #import <unistd.h> // standard symbolic constants and types
 
-
+/*
+    Flag for whether flagging is enabled or disabled
+*/
 #if 0
 
+/////////////////////////////////////////////
 // Logging Enabled - See log level below
+//////////////////////////////////////////////
+
 
 // Logging uses the CocoaLumberjack framework (which is also GCD based).
 // http://code.google.com/p/cocoalumberjack/
@@ -65,8 +74,9 @@ static const int logLevel = LOG_LEVEL_VERBOSE;
 
 #else
 
+//////////////////////////////////
 // Logging Disabled
-
+//////////////////////////////////
 #define LogError(frmt, ...)     {}
 #define LogWarn(frmt, ...)      {}
 #define LogInfo(frmt, ...)      {}
@@ -82,6 +92,11 @@ static const int logLevel = LOG_LEVEL_VERBOSE;
 
 #endif
 
+
+
+
+
+
 /**
  * Seeing a return statements within an inner block
  * can sometimes be mistaken for a return point of the enclosing method.
@@ -96,18 +111,41 @@ static const int logLevel = LOG_LEVEL_VERBOSE;
 **/
 #define SOCKET_NULL -1
 
-
+/**
+    @brief Gets socket exception string
+    @returns NSString
+**/
 NSString *const GCDAsyncSocketException = @"GCDAsyncSocketException";
+
+
+/**
+    @brief Gets socket error domain
+    @return NSString
+**/
 NSString *const GCDAsyncSocketErrorDomain = @"GCDAsyncSocketErrorDomain";
 
+
+//////////////////////////////
+// IF FOR THE IPHONE
+//////////////////////////////
+
 #if !TARGET_OS_IPHONE
+
+/**
+    @brief Returns SSL Cipher Suite
+    @return NSSTring
+**/
 NSString *const GCDAsyncSocketSSLCipherSuites = @"GCDAsyncSocketSSLCipherSuites";
 
+/**
+    @brief Returns SSL DiffieHellman Parameters
+    @return NSString
+**/
 NSString *const GCDAsyncSocketSSLDiffieHellmanParameters = @"GCDAsyncSocketSSLDiffieHellmanParameters";
 #endif
 
+
 /** 
- *
  * \enum GCDAsyncSocketFlags
  *
  * \brief Enumerator for socket flags 
@@ -135,7 +173,6 @@ enum GCDAsyncSocketFlags
 };
 
 /** 
- *
  * \enum GCDAsyncSocketConfig
  *
  * \brief Enumerator for socket configuration 
@@ -152,6 +189,12 @@ enum GCDAsyncSocketConfig
   static NSThread *sslHandshakeThread;
 #endif
 
+
+
+
+/**
+    GCDASynSocket (Private API)
+**/
 @interface GCDAsyncSocket (Private)
 /////////////////////////////////////////
 // Accepting
@@ -159,6 +202,7 @@ enum GCDAsyncSocketConfig
 
 
 /**
+    @brief Whether or not to accept data on the socket
     @param int
     @return boolean
 **/
@@ -170,20 +214,29 @@ enum GCDAsyncSocketConfig
 /////////////////////////////////////////
 
 /**
+    @breief Start a connection timeout for the connection
     @param NSTimeInterval
     @return void
 **/
 - (void)startConnectTimeout:(NSTimeInterval)timeout;
 
+
+
 /**
+    @brief End the connection timeout for the connection
     @return void
 **/
 - (void)endConnectTimeout;
 
+
+
 /**
+    @brief Do a connection timeout for the connection
     @return void
 **/
 - (void)doConnectTimeout;
+
+
 
 /**
     @param int
@@ -192,6 +245,8 @@ enum GCDAsyncSocketConfig
     @return void
 **/
 - (void)lookup:(int)aConnectIndex host:(NSString *)host port:(UInt16)port;
+
+
 
 /**
     @param int
@@ -260,40 +315,47 @@ enum GCDAsyncSocketConfig
 // Errors
 /////////////////////////////////////////
 /**
+    @brief Bad configuration eror
     @param msg
     @return NSError
 **/
 - (NSError *)badConfigError:(NSString *)msg;
 
 /**
+    @brief Bad parameter error
     @param NSString msg
     @return NSError
 **/
 - (NSError *)badParamError:(NSString *)msg;
 
 /**
+    @brief Global address information error
     @param int
     @return NSError
 **/
 - (NSError *)gaiError:(int)gai_error;
 
 /**
+    @brief Error number error
     @return NSError
 **/
 - (NSError *)errnoError;
 
 /**
+    @brief Error number error with reason
     @param NSString
     @return NSError
 **/
 - (NSError *)errnoErrorWithReason:(NSString *)reason;
 
 /**
+    @brief Connection timeout error
     @return NSError
 **/
 - (NSError *)connectTimeoutError;
 
 /**
+    @brief Some other type of error not already defined
     @param msg
     @return NSError
 **/
@@ -303,88 +365,104 @@ enum GCDAsyncSocketConfig
 // Diagnostics
 /////////////////////////////////////////
 /**
+    @brief  Gets the connected IP v4 host
     @return NSString
 **/
 - (NSString *)connectedHost4;
 
 /**
+    @brief  Gets the connected IP v6 host
     @return NSString
 **/
 - (NSString *)connectedHost6;
 
 /**
+    @brief Get the connected IPv4 port
     @return unsigned 16-bit integer
 **/
 - (UInt16)connectedPort4;
 
 /**
+    @brief Gets the connected IPv6 port
     @return unsigned 16-bit integer
 **/
 - (UInt16)connectedPort6;
 
 /**
+    @brief Gets the IPv4 localhost
     @return NSString
 **/
 - (NSString *)localHost4;
 
 /**
+    @brief Gets the IPv6 local host
     @return NSString
 **/
 - (NSString *)localHost6;
 
 /**
+    @brief Gets the IPv4 local port
     @return unsigned 16-bit integer
 **/
 - (UInt16)localPort4;
 
 /**
+    @brief Gets the IPv6 local port
     @return unsigned 16-bit integer
 **/
 - (UInt16)localPort6;
 
 /**
+    @brief Gets the connected host for the IPv4 socket with socket file descriptor
     @param int
     @return NSString
 **/
 - (NSString *)connectedHostFromSocket4:(int)socketFD;
 
 /**
+    @brief Gets the connected host for the IPv6 socket with socket file descriptor
     @param int
     @return NSString
 **/
 - (NSString *)connectedHostFromSocket6:(int)socketFD;
 
 /**
+    @brief Gets connected port for IPv4 socket
     @param int
     @return unsigned 16-bit integer
 **/
 - (UInt16)connectedPortFromSocket4:(int)socketFD;
 
 /**
+    @brief Gets the connected port for the IPv6 socket
     @param int
     @return unsigned 16-bit integer
 **/
 - (UInt16)connectedPortFromSocket6:(int)socketFD;
 
 /**
+    @brief Gets the local host from IPv4 socket
     @param int
     @return NSString
 **/
 - (NSString *)localHostFromSocket4:(int)socketFD;
 
 /**
+    @brief Gets the local host for the IPv6 socket
     @param int
     @return NSString
 **/
 - (NSString *)localHostFromSocket6:(int)socketFD;
 
 /**
+    @brief Gets the local port for the IPv4 socket
     @param int
     @return unsigned 16-bit integer
 **/
 - (UInt16)localPortFromSocket4:(int)socketFD;
 
 /**
+    @brief Gets the local port for the IPv6 socket
     @param int
     @return unsigned 16-bit integer
 **/
@@ -396,6 +474,7 @@ enum GCDAsyncSocketConfig
 /////////////////////////////////////////
 
 /**
+    @brief  Gets the IPv4 or 6 interface address from interface description and port
     @param NSData
     @param NSData
     @param NSString
@@ -415,25 +494,31 @@ enum GCDAsyncSocketConfig
 - (void)setupReadAndWriteSourcesForNewlyConnectedSocket:(int)socketFD;
 
 /**
-    @brief Suspends the read source
+    @brief Suspends the reading from a source
     @return void
 **/
 - (void)suspendReadSource;
 
+
+
 /**
-    @brief Resumes the read source
+    @brief Resumes the reading from a source
     @return void
 **/
 - (void)resumeReadSource;
 
+
+
 /**
-    @brief Suspends the write source
+    @brief Suspends the writing to source
     @return void
 **/
 - (void)suspendWriteSource;
 
+
+
 /**
-    @brief Resumes the write source
+    @brief Resumes the writing to source
     @return void
 **/
 - (void)resumeWriteSource;
@@ -443,18 +528,21 @@ enum GCDAsyncSocketConfig
 // Reading
 /////////////////////////////////////////
 
+
 /**
     @brief Conditionally starts a new read.
   
-  It is called when:
-    - a user requests a read
-    - after a read request has finished (to handle the next request)
-    - immediately after the socket opens to handle any pending requests
+    It is called when:
+        - a user requests a read
+        - after a read request has finished (to handle the next request)
+        - immediately after the socket opens to handle any pending requests
   
    This method also handles auto-disconnect post read completion.
+
     @return void
 **/
 - (void)maybeDequeueRead;
+
 
 /**
     @brief Reads data
@@ -538,17 +626,20 @@ enum GCDAsyncSocketConfig
 - (void)endCurrentWrite;
 
 /**
+    @brief Setup the wrtie timeout timer
     @param NSTimeInterval
     @return void
 **/
 - (void)setupWriteTimerWithTimeout:(NSTimeInterval)timeout;
 
 /**
+    @brief Do write timeout
     @return void
 **/
 - (void)doWriteTimeout;
 
 /**
+    @brief Do write timeout with a time interval extension
     @param NSTimeInterval
     @return void
 **/
@@ -582,6 +673,7 @@ enum GCDAsyncSocketConfig
 
 /**
     Class method
+    @brief Gets the host from an address
     @param struct sockaddr_in (IP version 4)
     @return NSString
 **/
@@ -589,6 +681,7 @@ enum GCDAsyncSocketConfig
 
 /**
     Class method
+    @brief Gets the host from an address
     @param struct sockaddr_in6
     @return NSString
 **/
@@ -596,6 +689,7 @@ enum GCDAsyncSocketConfig
 
 /**
     Class method
+    @brief Gets port from address
     @param struck sockaddr_in (IP version 4)
     @return unsigned 16-bit integer
 **/
@@ -603,6 +697,7 @@ enum GCDAsyncSocketConfig
 
 /**
     Class method
+    @brief Gets port from address
     @param struct sockaddr_in6 (IP version 6)
     @return UInt16
 **/
@@ -616,10 +711,11 @@ enum GCDAsyncSocketConfig
 
 /**
     @brief The GCDAsyncReadPacket encompasses the instructions for any given read.
- * The content of a read packet allows the code to determine if we're:
- *  - reading to a certain length
- *  - reading to a certain separator
- *  - or simply reading the first chunk of available data
+ 
+    The content of a read packet allows the code to determine if we're:
+    - reading to a certain length
+    - reading to a certain separator
+    - or simply reading the first chunk of available data
 **/
 @interface GCDAsyncReadPacket : NSObject
 {
@@ -678,6 +774,7 @@ enum GCDAsyncSocketConfig
 }
 
 /**
+    @brief Initialize the GCDAsyncReadPacket
     @param NSMutableData
     @param NSUInteger
     @param NSUInteger
@@ -767,12 +864,22 @@ enum GCDAsyncSocketConfig
 {
 	if((self = [super init]))
 	{
-		bytesDone = 0; // number of bytes that have been read so far for the read operation
+         // number of bytes that have been read so far for the read operation
+		bytesDone = 0;
         
-		maxLength = m; // set the maximum length of the read packet
-		timeout = t;  // set the read timeout
-		readLength = l; // set the read length
-		term = [e copy];  // set the terminator
+        // set the maximum length of the read packet
+		maxLength = m;
+        
+        // set the read timeout
+		timeout = t;  
+        
+        // set the read length
+		readLength = l; 
+        
+        // set the terminator
+		term = [e copy];  
+        
+        // Set the tag
 		tag = i;
 		
 		if (d) // if there is mutable data passed-in to initialize the method then copy the buffer, set the offset and buffer length
@@ -783,8 +890,9 @@ enum GCDAsyncSocketConfig
 			bufferOwner = NO; // if there is not a buffer owner
 			originalBufferLength = [d length];
 		}
-		else // if there is not mutable data
+		else // if there is no mutable data
 		{
+            
 			if (readLength > 0)
             {
                 // Initialize the read buffer with a specific length
@@ -1341,7 +1449,7 @@ enum GCDAsyncSocketConfig
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
-    The GCDAsyncWritePacket encompasses the instructions for any given write.
+    @brief The GCDAsyncWritePacket encompasses the instructions for any given write.
 **/
 @interface GCDAsyncWritePacket : NSObject
 {
@@ -1369,7 +1477,6 @@ enum GCDAsyncSocketConfig
 
 /**
     @brief Initialize the GCDAsyncWritePacket with timeout ang tag
-
     @param NSData
     @param NSTimeInterval
     @param long
@@ -1384,7 +1491,6 @@ enum GCDAsyncSocketConfig
 
 
 /**
- 
     @brief Initialize the GCDAsyncWritePacket with timeout ang tag
     returns self
  
@@ -1397,11 +1503,14 @@ enum GCDAsyncSocketConfig
 {
 	if((self = [super init]))
 	{
-		buffer = [d retain]; // the write buffer
+        // the write buffer
+		buffer = [d retain]; 
         
-		bytesDone = 0; // number of bytes that have been written so far for the write operation
+        // number of bytes that have been written so far for the write operation
+		bytesDone = 0; 
         
-		timeout = t; // the write response timeout
+        // the write response timeout
+		timeout = t; 
 		tag = i;
 	}
 	return self;
@@ -1419,9 +1528,9 @@ enum GCDAsyncSocketConfig
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 #pragma mark -
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 /**
     The GCDAsyncSpecialPacket encompasses special instructions for interruptions in the read/write queues.
@@ -1433,6 +1542,17 @@ enum GCDAsyncSocketConfig
     
     /**
         @brief Transport Layer Security settings
+        Includes keys for:
+                GCDAsyncSocketSSLCipherSuites
+                kCFStreamSSLIsServer
+                kCFStreamSSLPeerName
+                kCFStreamSSLAllowsAnyRoot
+                kCFStreamSSLAllowsExpiredRoots
+                kCFStreamSSLValidatesCertificateChain
+                kCFStreamSSLAllowsExpiredCertificates
+                kCFStreamSSLCertificates
+                kCFStreamSSLLevel
+                GCDAsyncSocketSSLDiffieHellmanParameters
     **/
 	NSDictionary *tlsSettings; 
 }
@@ -1440,7 +1560,6 @@ enum GCDAsyncSocketConfig
 /**
     @brief Initialize the GCDAsyncSpecial packet with settings
     returns self
- 
     @param NSDictionary
     @return self
 **/
@@ -1448,8 +1567,10 @@ enum GCDAsyncSocketConfig
 
 @end
 
+
+
 /**
- 
+    A special packet for transport layer security
 **/
 @implementation GCDAsyncSpecialPacket
 
@@ -1638,6 +1759,9 @@ enum GCDAsyncSocketConfig
 	
 	[partialReadBuffer release];
 	
+////////////////////////////////
+// FOR THE IPHONE
+///////////////////////////////
 #if !TARGET_OS_IPHONE
     
 	[sslReadBuffer release];
@@ -1650,9 +1774,9 @@ enum GCDAsyncSocketConfig
 	[super dealloc];
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 #pragma mark Configuration
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -2309,9 +2433,9 @@ enum GCDAsyncSocketConfig
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 #pragma mark Accepting
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -2329,7 +2453,7 @@ enum GCDAsyncSocketConfig
 }
 
 /**
-    @brief Whether accept connection on interface and port
+    @brief Whether can accept connection on interface and port
     @param NSString
     @param UInt16
     @return BOOL
@@ -2448,7 +2572,8 @@ enum GCDAsyncSocketConfig
 
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		
-		if (delegate == nil) // Must have delegate set
+        // Test whether there is a delegate before accepting.  There must be a connection delegate set before accepting
+		if (delegate == nil) 
 		{
 			result = NO;
 			
@@ -2459,8 +2584,12 @@ enum GCDAsyncSocketConfig
 			return_from_block;
 		}
 		
-		if (delegateQueue == NULL) // Must have delegate queue set
-		{
+        ////////////////////////////////////////////////
+        // There is a delegate set
+        ////////////////////////////////////////////////
+        
+        // Must have delegate queue set
+		if (delegateQueue == NULL) 	{
 			result = NO;
 			
 			NSString *msg = @"Attempting to accept without a delegate queue. Set a delegate queue first.";
@@ -2488,8 +2617,12 @@ enum GCDAsyncSocketConfig
 			return_from_block;
 		}
 		
+        //////////////////////////////////////////////////////////////
+        // No delegate, delegate queue, and IPv4 and IPv6 are disabled
+        //////////////////////////////////////////////////////////////
         
-		if (![self isDisconnected]) // Must be disconnected
+        // Must be disconnected
+		if (![self isDisconnected]) 
 		{
 			result = NO;
 			
@@ -2513,7 +2646,7 @@ enum GCDAsyncSocketConfig
         // Get the interface address from an interface description and port
 		[self getInterfaceAddress4:&interface4 address6:&interface6 fromDescription:interface port:port];
 		
-        
+        // Check if the interfaces are nil
 		if ((interface4 == nil) && (interface6 == nil))
 		{
 			result = NO;
@@ -2525,6 +2658,12 @@ enum GCDAsyncSocketConfig
 			return_from_block;
 		}
 		
+        ////////////////////////////////////////////////////
+        // The interfaces are not nil
+        ////////////////////////////////////////////////////
+
+        
+        
 		if (isIPv4Disabled && (interface6 == nil))
 		{
 			result = NO;
@@ -2735,7 +2874,7 @@ enum GCDAsyncSocketConfig
 		dispatch_sync(socketQueue, block);
     }
     
-    
+    // Check whether to accept on block
 	if (result == NO)
 	{
 		LogInfo(@"Error in accept: %@", err);
@@ -2750,12 +2889,13 @@ enum GCDAsyncSocketConfig
         }
 	}
 	
+    // Can accept
 	return result;
 }
 
 
 /**
-    @brief Whether accept for parent socket file description
+    @brief Whether accept for parent socket file descriptor
     @param int
     @return BOOL
 **/
@@ -2951,8 +3091,12 @@ enum GCDAsyncSocketConfig
 		return NO;
 	}
 	
-    // Test whether not disconnected
-	if (![self isDisconnected]) // Must be disconnected
+    //////////////////////////////////////////////////////////////
+    // There is a delegate and a delegateQueue
+    //////////////////////////////////////////////////////////////
+    
+    // Test whether already connected or attempting to connect
+	if (![self isDisconnected]) 
 	{
 		if (errPtr)
 		{
@@ -2962,6 +3106,12 @@ enum GCDAsyncSocketConfig
 		return NO;
 	}
 	
+    
+    /////////////////////////////////////////////////
+    // Not connecting or attempting to connect
+    /////////////////////////////////////////////////
+    
+    
     // Whether IP version 4 or 6 is disabled
 	BOOL isIPv4Disabled = (config & kIPv4Disabled) ? YES : NO;
 	BOOL isIPv6Disabled = (config & kIPv6Disabled) ? YES : NO;
@@ -3354,6 +3504,7 @@ enum GCDAsyncSocketConfig
 }
 
 /**
+    @brief Lookup a connection index
     @param int
     @param NSString
     @param UInt16
@@ -3416,7 +3567,9 @@ enum GCDAsyncSocketConfig
         // Set the protocol as unspecified
 		hints.ai_protocol = IPPROTO_TCP;
 		
+        
         // Get address information error
+        // Returns the dotted-quad IP address of hostName.
 		int gai_error = getaddrinfo([host UTF8String], [portStr UTF8String], &hints, &res0);
 		
         // If there is an error getting the human-readable text string representing hostnames into a dynamicall allocated linked list of struct addrinfo structures.
@@ -3479,6 +3632,7 @@ enum GCDAsyncSocketConfig
 
 
 /**
+    @brief Lookup connection index
     @param int
     @param NSData
     @param NSData
@@ -3530,9 +3684,12 @@ enum GCDAsyncSocketConfig
 		return;
 	}
 	
+    /////////////////////////////////////////
 	// Start the normal connection process
-	
+	////////////////////////////////////////
+    
 	NSError *err = nil;
+
 	if (![self connectWithAddress4:address4 address6:address6 error:&err])
 	{
         // Close the socket with an error message
@@ -4098,7 +4255,7 @@ enum GCDAsyncSocketConfig
         //  Asynchronously cancel the dispatch source, preventing any further invocation of its event handler block.
 		dispatch_source_cancel(readSource);
 		
-        // Resume reading 
+        // Resume reading  from the source
 		[self resumeReadSource];
 		
 		readSource = NULL;
@@ -4386,6 +4543,7 @@ enum GCDAsyncSocketConfig
 }
 
 /**
+    @brief Gets the gloabl address information error
     @param int
     @return NSError
 **/
@@ -5538,10 +5696,10 @@ enum GCDAsyncSocketConfig
         
 		LogVerbose(@"socketFDBytesAvailable: %lu", socketFDBytesAvailable);
 		
-        
+        // Check if there are bytes available to read from the socket
 		if (socketFDBytesAvailable > 0)
         {   
-            // reads the data
+            // reads the data from the socket
 			[self doReadData];
             
 		}else{ // if there are no bytes available to read
@@ -6059,8 +6217,10 @@ enum GCDAsyncSocketConfig
 			{
 				LogVerbose(@"Dequeued GCDAsyncSpecialPacket");
 				
+                //////////////////////////////////////////////////////
 				// Attempt to start TLS
-                // Bitwise OR operator. If either bit is 1, the corresponding result bit is set to 1. Otherwise, the corresponding result bit is set to 0.
+                // If either flags or the StartingReadTLS flag is 1, then the result is 1.  Otherwise, the result is zero
+                //////////////////////////////////////////////////////
 				flags |= kStartingReadTLS;
 				
 				// This method won't do anything unless both kStartingReadTLS and kStartingWriteTLS are set
@@ -6877,6 +7037,9 @@ enum GCDAsyncSocketConfig
         
 		shouldDisconnect = YES;
 		
+        /////////////////////////////////////
+        // For the IPHONE
+        /////////////////////////////////////
 		#if !TARGET_OS_IPHONE
 			error = [self sslError:errSSLClosedAbort];
 		#endif
@@ -6918,7 +7081,7 @@ enum GCDAsyncSocketConfig
         // Close the socket
 		[self closeWithError:error];
 	}
-	else
+	else // If should not disconnect
 	{
 		// Notify the delegate
 		
@@ -7003,6 +7166,7 @@ enum GCDAsyncSocketConfig
             
 			NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 			
+            
 			[theDelegate socket:self didReadData:result withTag:theRead->tag];
 			
 			[pool drain];
@@ -8565,7 +8729,9 @@ OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, size_t 
 			}
 		}
 		
+        ////////////////////////////////////
 		// 8. GCDAsyncSocketSSLCipherSuites
+        /////////////////////////////////////
 		
 		value = [tlsSettings objectForKey:GCDAsyncSocketSSLCipherSuites];
 
@@ -9233,6 +9399,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
         // Bitwise AND assignment to determine if flag is 1 or 0
 		flags &= ~kSocketCanAcceptBytes;
         
+        
         // has bytes available on the socket
         // Bitwise AND assignment to determine if flag is 1 or 0
 		flags &= ~kSecureSocketHasBytesAvailable; 
@@ -9250,8 +9417,9 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 			}
 		}
 		
+        /////////////////////////////////////////////////
         // If the readString or writeStream is not NULL
-        
+        /////////////////////////////////////////////////
         
         // streamContext is a struct for holding client information
 		streamContext.version = 0;

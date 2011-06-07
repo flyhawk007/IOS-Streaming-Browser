@@ -8,7 +8,9 @@
 @class HTTPMessage;
 
 
-
+/**
+    @brief Class for HTTP Authentication Requests
+**/
 @interface HTTPAuthenticationRequest : NSObject
 {
     /**

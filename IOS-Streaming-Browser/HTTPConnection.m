@@ -14,6 +14,7 @@
 #import "DDLog.h"
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
+#import "DDKeychain.h"
 
 // Log levels: off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -153,7 +154,7 @@ static NSMutableArray *recentNonces;
 		// if there is a dispatch queue for requests
 		if (aConfig.queue)
 		{
-            // Get the HTTPConfig dispatch queue
+            // Get the HTTPConfig dispatch queue for requests
 			connectionQueue = aConfig.queue;
             
             // Increments the reference count on the connection queue
@@ -346,6 +347,17 @@ static NSMutableArray *recentNonces;
 	// Override me to provide the proper required SSL identity.
 	
 	return nil;
+
+	
+//  Functions used in the secure CocoaHTTPServer, but not applicable to the IOS    
+//	NSArray *result = [DDKeychain SSLIdentityAndCertificates];
+//	if([result count] == 0)
+//	{
+//		[DDKeychain createNewIdentity];
+//		return [DDKeychain SSLIdentityAndCertificates];
+//	}
+//	return result;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1319,9 +1331,10 @@ static NSMutableArray *recentNonces;
 		[self handleAuthenticationFailed];
 		return;
 	}
-	
-    // The host has been authenticated
     
+	//////////////////////////////////////////////
+    // The host has been authenticated
+    ///////////////////////////////////////////////
     
 	// Extract the method
 	NSString *method = [request method];
@@ -1589,7 +1602,7 @@ static NSMutableArray *recentNonces;
 		}
 	}
 	
-    // Local attribute
+    // Local attribute to build the response to the host
 	HTTPMessage *response;
 	
     // If there is not a range request
@@ -1978,7 +1991,7 @@ static NSMutableArray *recentNonces;
 	if (bytesLeft > 0)
 	{
         
-        // Gets the different between the read-chunk size and the writeQueue
+        // Gets the different between the read-chunk size and the writeQueue.  This determines the amount of space available on the writeQueue.  The intent is not to put more data on the writeQueue than the size of a READ_CHUNKSIZE or we could get a write buffer overflow
 		NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
         
         
@@ -2056,7 +2069,7 @@ static NSMutableArray *recentNonces;
     
 	if (bytesLeft > 0)
 	{
-        // Gets the difference between the read-chunk size and the writeQueue size
+        // Gets the difference between the read-chunk size and the writeQueue size. This determines the amount of space available on the writeQueue.  The intent is not to put more data on the writeQueue than the size of a READ_CHUNKSIZE or we could get a write buffer overflow
 		NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
         
         
@@ -2093,7 +2106,7 @@ static NSMutableArray *recentNonces;
 			[httpResponse setOffset:range.location];
 			
             
-            // Subtracts the writeQueuesize from the read chunk size
+            // Subtracts the writeQueueSize from the read chunk size. This determines the amount of space available on the writeQueue.  The intent is not to put more data on the writeQueue than the size of a READ_CHUNKSIZE or we could get a write buffer overflow
 			NSUInteger available = READ_CHUNKSIZE - writeQueueSize;
             
             // Gets the number of bytes to read
@@ -2227,7 +2240,7 @@ static NSMutableArray *recentNonces;
 		documentRoot = [documentRoot stringByAppendingString:@"/"];
 	}
 	
-    
+    // If the fullPath does not have a prefix of documentRoot
 	if (![fullPath hasPrefix:documentRoot])
 	{
 		return nil;

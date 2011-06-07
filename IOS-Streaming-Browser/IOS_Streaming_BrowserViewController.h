@@ -11,9 +11,10 @@
 
 @class HTTPServer;
 
-
-// The UIWebViewDelegate is telling the app that this class will be 
-// the delegate for our UIWebview.  
+/**
+    @brief The UIWebView delegate
+    The UIWebViewDelegate is telling the app that this class will be the delegate for our UIWebview.  
+**/
 @interface IOS_Streaming_BrowserViewController : UIViewController <UIWebViewDelegate> {
     
   

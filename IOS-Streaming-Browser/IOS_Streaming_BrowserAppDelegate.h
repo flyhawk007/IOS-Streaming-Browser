@@ -12,6 +12,9 @@
 @class IOS_Streaming_BrowserViewController;
 @class HTTPServer;
 
+/**
+    @brief the UIApplication delegate
+**/
 @interface IOS_Streaming_BrowserAppDelegate : NSObject <UIApplicationDelegate> {
     
 

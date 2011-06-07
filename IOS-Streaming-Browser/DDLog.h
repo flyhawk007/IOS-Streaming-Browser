@@ -684,7 +684,7 @@ NSString *ExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * The DDLogger protocol specifies that an optional formatter can be added to a logger.
+    @brief The DDLogger protocol specifies that an optional formatter can be added to a logger.
  * Most (but not all) loggers will want to support formatters.
  * 
  * However, writting getters and setters in a thread safe manner,
@@ -699,7 +699,6 @@ NSString *ExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * Logger implementations may simply extend this class,
  * and they can ACCESS THE FORMATTER VARIABLE DIRECTLY from within their logMessage method!
 **/
-
 @interface DDAbstractLogger : NSObject <DDLogger>
 {
     /**

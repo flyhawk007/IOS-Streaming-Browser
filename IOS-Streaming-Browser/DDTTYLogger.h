@@ -28,6 +28,7 @@
 
 
 /**
+ @brief Logger for Terminal output or Xcode console output, depending on where you are running your code.
     Use the DDLogger protocol
     parent is DDAbstractLogger
 **/

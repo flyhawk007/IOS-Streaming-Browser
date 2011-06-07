@@ -11,6 +11,7 @@
 static DDASLLogger *sharedInstance;
 
 /**
+    @brief Initialize the DDASLLogger
     The runtime sends initialize to each class in a program exactly one time just before the class, or any class that inherits from it, is sent its first message from within the program. (Thus the method may never be invoked if the class is not used.) The runtime sends the initialize message to classes in a thread-safe manner. Superclasses receive this message before their subclasses.
  
     This method may also be called directly (assumably by accident), hence the safety mechanism.
@@ -61,6 +62,7 @@ static DDASLLogger *sharedInstance;
 }
 
 /**
+    @brief Set the log message
     @param DDLogMessage
     @return void
 **/
@@ -68,17 +70,21 @@ static DDASLLogger *sharedInstance;
 {
 	NSString *logMsg = logMessage->logMsg;
 	
+    // If there is a log formatter
 	if (formatter)
 	{
 		logMsg = [formatter formatLogMessage:logMessage];
 	}
 	
+    // If there is a logMessage passed into this method
 	if (logMsg)
 	{
         // Create a constant read only local attribute
 		const char *msg = [logMsg UTF8String];
 		
 		int aslLogLevel;
+        
+        // Switch based on the logging level
 		switch (logMessage->logLevel)
 		{
 			// Note: By default ASL will filter anything above level 5 (Notice).
@@ -95,6 +101,7 @@ static DDASLLogger *sharedInstance;
 }
 
 /**
+    @brief Gets the logger name
     @return NSString
 **/
 - (NSString *)loggerName

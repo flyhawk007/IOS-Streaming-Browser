@@ -1,4 +1,4 @@
 <map id="G" name="G">
 <area shape="rect" id="node1" href="$protocolDDLogFormatter-p.html" title="\&lt;DDLogFormatter\&gt;" alt="" coords="5,5,163,33"/>
-<area shape="rect" id="node3" href="$interfaceDDLogFileFormatterDefault.html" title="DDLogFileFormatterDefault" alt="" coords="212,5,425,33"/>
+<area shape="rect" id="node3" href="$interfaceDDLogFileFormatterDefault.html" title="Most users will want file log messages to be prepended with the date and time. Rather than forcing th..." alt="" coords="212,5,425,33"/>
 </map>

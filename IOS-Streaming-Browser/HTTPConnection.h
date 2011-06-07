@@ -12,7 +12,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/**
+    @brief The HTTP Server configuration
+**/
 @interface HTTPConfig : NSObject
 {
 
@@ -62,6 +64,9 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+    @brief The HTTP Connection
+**/
 @interface HTTPConnection : NSObject
 {
     
@@ -163,9 +168,10 @@
 - (id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig;
 
 /**
- * Starting point for the HTTP connection after it has been fully initialized (including subclasses).
- * This method is called by the HTTP server.
- **/
+    @brief Starting point for the HTTP connection after it has been fully initialized (including subclasses).
+    This method is called by the HTTP server.
+    @return void
+**/
 - (void)start;
 
 /**
@@ -231,10 +237,11 @@
 
 /**
     @brief Returns whether or not the authentication challenge should use digest access authentication.
- * The alternative is basic authentication.
- * 
- * If at all possible, digest access authentication should be used because it's more secure.
- * Basic authentication sends passwords in the clear and should be avoided unless using SSL/TLS.
+    The alternative is basic authentication.
+    
+    If at all possible, digest access authentication should be used because it's more secure.
+    Basic authentication sends passwords in the clear and should be avoided unless using SSL/TLS.
+ 
     @return BOOL
 **/
 - (BOOL)useDigestAccessAuthentication;
@@ -255,13 +262,12 @@
 
 /**
     @brief Parses the given query string.
- * 
- * For example, if the query is "q=John%20Mayer%20Trio&num=50"
- * then this method would return the following dictionary:
- * { 
- *   q = "John Mayer Trio" 
- *   num = "50" 
- * }
+  
+    For example, if the query is "q=John%20Mayer%20Trio&num=50" then this method would return the following dictionary:
+    { 
+        q = "John Mayer Trio" 
+        num = "50" 
+    }
     @param NSString
     @return NSDictionary
 **/
@@ -302,10 +308,11 @@
 
 /**
     @brief This method is called to get a response for a request.
- * You may return any object that adopts the HTTPResponse protocol.
- * The HTTPServer comes with two such classes: HTTPFileResponse and HTTPDataResponse.
- * HTTPFileResponse is a wrapper for an NSFileHandle object, and is the preferred way to send a file response.
- * HTTPDataResponse is a wrapper for an NSData object, and may be used to send a custom response.
+ 
+    You may return any object that adopts the HTTPResponse protocol.
+    The HTTPServer comes with two such classes: HTTPFileResponse and HTTPDataResponse.
+    HTTPFileResponse is a wrapper for an NSFileHandle object, and is the preferred way to send a file response.
+    HTTPDataResponse is a wrapper for an NSData object, and may be used to send a custom response.
     @param NSString
     @param NSString
     @return NSObject <HTTPResponse>
@@ -342,7 +349,8 @@
 - (void)handleVersionNotSupported:(NSString *)version;
 
 /**
-    Called if the authentication information was required and absent, or if authentication failed.
+    @brief Called if the authentication information was required and absent, or if authentication failed.
+    @return void
 **/
 - (void)handleAuthenticationFailed;
 
@@ -404,6 +412,9 @@
 @end
 
 
+/**
+    @brief the HTTP connection for the response
+**/
 @interface HTTPConnection (AsynchronousHTTPResponse)
 
 /**

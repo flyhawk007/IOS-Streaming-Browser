@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1227FD139CF61600D7E0D4 /* DDKeychain.m */; };
+		EC122800139CF89200D7E0D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1227FF139CF89100D7E0D4 /* Security.framework */; };
 		EC7CC649138161E8001B5D70 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC642138161E8001B5D70 /* DDLog.m */; };
 		EC7CC64A138161E8001B5D70 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC644138161E8001B5D70 /* DDTTYLogger.m */; };
 		EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC646138161E8001B5D70 /* DDASLLogger.m */; };
@@ -51,6 +53,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC1227FC139CF61600D7E0D4 /* DDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKeychain.h; sourceTree = "<group>"; };
+		EC1227FD139CF61600D7E0D4 /* DDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDKeychain.m; sourceTree = "<group>"; };
+		EC1227FF139CF89100D7E0D4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EC7CC641138161E8001B5D70 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
 		EC7CC642138161E8001B5D70 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
 		EC7CC643138161E8001B5D70 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
@@ -124,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC122800139CF89200D7E0D4 /* Security.framework in Frameworks */,
 				ECE61ABF137C55C400622B58 /* SystemConfiguration.framework in Frameworks */,
 				ECE61ABD137C55BB00622B58 /* AudioToolbox.framework in Frameworks */,
 				ECE61ABB137C55B100622B58 /* MessageUI.framework in Frameworks */,
@@ -138,6 +144,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC1227FA139CF5D700D7E0D4 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				EC1227FC139CF61600D7E0D4 /* DDKeychain.h */,
+				EC1227FD139CF61600D7E0D4 /* DDKeychain.m */,
+			);
+			name = Keychain;
+			sourceTree = "<group>";
+		};
 		EC7CC640138161D5001B5D70 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +189,7 @@
 		ECE619FC137C3E5E00622B58 = {
 			isa = PBXGroup;
 			children = (
+				EC1227FA139CF5D700D7E0D4 /* Keychain */,
 				EC7CC640138161D5001B5D70 /* Logging */,
 				ECE61A38137C3E8400622B58 /* TCP */,
 				ECE61A3C137C3E9C00622B58 /* HTTP */,
@@ -196,6 +212,7 @@
 		ECE61A0A137C3E5F00622B58 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC1227FF139CF89100D7E0D4 /* Security.framework */,
 				ECE61ABE137C55C400622B58 /* SystemConfiguration.framework */,
 				ECE61ABC137C55BA00622B58 /* AudioToolbox.framework */,
 				ECE61ABA137C55B100622B58 /* MessageUI.framework */,
@@ -414,6 +431,7 @@
 				EC7CC64A138161E8001B5D70 /* DDTTYLogger.m in Sources */,
 				EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */,
 				EC7CC64C138161E8001B5D70 /* DDFileLogger.m in Sources */,
+				EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

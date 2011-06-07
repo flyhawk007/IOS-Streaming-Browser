@@ -7,6 +7,7 @@ var NAVTREE =
       [ "DDAbstractLogger", "interfaceDDAbstractLogger.html", null ],
       [ "DDASLLogger", "interfaceDDASLLogger.html", null ],
       [ "DDFileLogger", "interfaceDDFileLogger.html", null ],
+      [ "DDKeychain", "interfaceDDKeychain.html", null ],
       [ "DDLog", "interfaceDDLog.html", null ],
       [ "DDLogFileFormatterDefault", "interfaceDDLogFileFormatterDefault.html", null ],
       [ "DDLogFileInfo", "interfaceDDLogFileInfo.html", null ],
@@ -45,6 +46,7 @@ var NAVTREE =
     [ "Data Structure Index", "classes.html", null ],
     [ "Class Hierarchy", "hierarchy.html", [
       [ "_DDRange", "struct__DDRange.html", null ],
+      [ "DDKeychain", "interfaceDDKeychain.html", null ],
       [ "DDLog", "interfaceDDLog.html", null ],
       [ "DDLogFileInfo", "interfaceDDLogFileInfo.html", null ],
       [ "<DDLogFileManager>", "protocolDDLogFileManager-p.html", [
@@ -100,6 +102,8 @@ var NAVTREE =
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDData.m", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDFileLogger.h", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDFileLogger.m", null, null ],
+      [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDKeychain.h", null, null ],
+      [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDKeychain.m", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDLog.h", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDLog.m", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDNumber.h", null, null ],

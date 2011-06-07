@@ -49,7 +49,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
-    GCDAsyncSocket
+    @brief A Grand Central Dispatch Asynchronous Socket
 **/
 @interface GCDAsyncSocket : NSObject
 {
@@ -969,16 +969,16 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 **/
 - (void)writeData:(NSData *)data withTimeout:(NSTimeInterval)timeout tag:(long)tag;
 
+///////////////////////////////////////////////////////////////////
 #pragma mark Security
+///////////////////////////////////////////////////////////////////
 
 /**
     @brief Secures the connection using SSL/TLS.
- * 
- * This method may be called at any time, and the TLS handshake will occur after all pending reads and writes
- * are finished. This allows one the option of sending a protocol dependent StartTLS message, and queuing
- * the upgrade to TLS at the same time, without having to wait for the write to finish.
- * Any reads or writes scheduled after this method is called will occur over the secured connection.
- * 
+ 
+    This method may be called at any time, and the TLS handshake will occur after all pending reads and writes are finished. This allows one the option of sending a protocol dependent StartTLS message, and queuing the upgrade to TLS at the same time, without having to wait for the write to finish.
+    Any reads or writes scheduled after this method is called will occur over the secured connection.
+ 
  * The possible keys and values for the TLS settings are well documented.
  * Some possible keys are:
  * - kCFStreamSSLLevel
@@ -1014,7 +1014,9 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 **/
 - (void)startTLS:(NSDictionary *)tlsSettings;
 
+/////////////////////////////////////////////////////////////////////
 #pragma mark Advanced
+/////////////////////////////////////////////////////////////////////
 
 /**
     @brief It's not thread-safe to access certain variables from outside the socket's internal queue.
@@ -1172,7 +1174,10 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 
 #endif
 
+/////////////////////////////////////////////////////////////////////
 #pragma mark Utilities
+/////////////////////////////////////////////////////////////////////
+
 
 /***************************************************************
  * Extracting host and port information from raw address data.
@@ -1233,10 +1238,13 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 
 @end
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 #pragma mark -
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
+/**
+    @brief Protocol for implementing a GCDAsyncSocket as a delegate
+**/
 @protocol GCDAsyncSocketDelegate
 @optional
 

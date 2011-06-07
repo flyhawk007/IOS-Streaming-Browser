@@ -9,3 +9,5 @@ Status of development
 -------------
 5/14/11 -   Redid the core of the project to match the current CocoaHTTPServer version.  The previous version was based on an old CocoaHTTPServer version which had memory leaks.5/16/11 - Restricted the editing of the address bar, and added controls to utilize Google strict filtering.  This is a simple filter to prevent users from viewing inappropriate content.  Note: Additional filters need to be added.5/17/11 - Added feature to restrict Google and UTube searches to 'safe' mode.  
 5/25/11 - Continuing to comment the Grand Central Dispatch Asychronous Socket files
+
+6/5/11 - Continuing commenting files and added doxygen documentation
