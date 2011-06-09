@@ -44,6 +44,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation IOS_Streaming_BrowserViewController
 
+
+// Synthesize the getters and setters
 @synthesize startStopButton;
 @synthesize webView;
 @synthesize addressBar;
@@ -80,7 +82,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+///////////////////////////////////////////////////////////////
 #pragma mark screenshot
+///////////////////////////////////////////////////////////////
+
 
 /**
     Copied from http://developer.apple.com/library/ios/#qa/qa1703/_index.html , with new imageScale to take Retina-to-320x480 scaling into account
@@ -155,13 +161,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // Retrieve the screenshot image
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	
+    
     UIGraphicsEndImageContext();
 	
+    
     return image;
 }
 
-
+///////////////////////////////////////////////////////////////
 #pragma mark helpers
+///////////////////////////////////////////////////////////////
+
 
 /**
     @brief Gets the path to the document directory
@@ -191,9 +201,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // DDLogError(@"Image Name is: %@",imagePath);
     
     // Check if a file already exists, and if so, remove it
-	if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
-		[[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-	}
+	//if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+	//	[[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+	//}
 	
     
     // get screenshot image!
@@ -219,7 +229,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	
 	// Tell the server to broadcast its presence via Bonjour.
 	// This allows browsers such as Safari to automatically discover our service.
-	[httpServer setType:@"_http._tcp."];
+	[httpServer setType:@"_http._udp."];
+    // 6/8/11: Changed to udp for testing purposes
+    // The old value was @"_http._tcp."
+
 	
 	// Normally there's no need to run our server on any specific port.
 	// Technologies like Bonjour allow clients to dynamically discover the server's port at runtime.
@@ -302,14 +315,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSString *imagePath = [[self pathToDocumentsDirectory] stringByAppendingPathComponent:imageName];
     
 	
-    if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
-        [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
-        // DDLogError(@"File removed");
-    }
+    //if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+    //    [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+    //    // DDLogError(@"File removed");
+    //}
 }
 
 
+///////////////////////////////////////////////////////////////
 #pragma mark - View lifecycle
+///////////////////////////////////////////////////////////////
+
 
 /**
     @brief The view will appear
@@ -382,11 +398,16 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return NO;
+    
+    return YES;
 }
 
 
+///////////////////////////////////////////////////////////////
 #pragma mark event handlers
+///////////////////////////////////////////////////////////////
+
+
 
 /**
     @brief Upon the start/stop button being pressed
@@ -397,7 +418,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogError(@"handleStartStopTapped");
     
-	if (self.startStopButton.selected) { // stop recording and deselect
+    
+    // stop recording and deselect
+	if (self.startStopButton.selected) { 
 		[self stopRecording];
 
 		self.startStopButton.selected = NO;

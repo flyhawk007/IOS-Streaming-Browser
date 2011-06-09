@@ -56,6 +56,7 @@
 		EC1227FC139CF61600D7E0D4 /* DDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKeychain.h; sourceTree = "<group>"; };
 		EC1227FD139CF61600D7E0D4 /* DDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDKeychain.m; sourceTree = "<group>"; };
 		EC1227FF139CF89100D7E0D4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EC26FBB513A0BD89000F6266 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EC7CC641138161E8001B5D70 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
 		EC7CC642138161E8001B5D70 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
 		EC7CC643138161E8001B5D70 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		ECE619FC137C3E5E00622B58 = {
 			isa = PBXGroup;
 			children = (
+				EC26FBB513A0BD89000F6266 /* Default@2x.png */,
 				EC1227FA139CF5D700D7E0D4 /* Keychain */,
 				EC7CC640138161D5001B5D70 /* Logging */,
 				ECE61A38137C3E8400622B58 /* TCP */,

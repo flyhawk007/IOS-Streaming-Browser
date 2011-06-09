@@ -328,9 +328,12 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)isSecureServer
 {
+    
 	
 	// Override me to create an https server...
-	
+    
+    
+    
 	return NO;
 }
 
@@ -349,14 +352,6 @@ static NSMutableArray *recentNonces;
 	return nil;
 
 	
-//  Functions used in the secure CocoaHTTPServer, but not applicable to the IOS    
-//	NSArray *result = [DDKeychain SSLIdentityAndCertificates];
-//	if([result count] == 0)
-//	{
-//		[DDKeychain createNewIdentity];
-//		return [DDKeychain SSLIdentityAndCertificates];
-//	}
-//	return result;
 
 }
 
@@ -771,7 +766,7 @@ static NSMutableArray *recentNonces;
 		// We are configured to be an HTTPS server.
 		// That is, we secure via SSL/TLS the connection prior to any communication.
 		
-		NSArray *certificates = [self sslIdentityAndCertificates];
+		NSDictionary *certificates = [self sslIdentityAndCertificates];
 		
         // if there are certificates in the array
 		if ([certificates count] > 0)
