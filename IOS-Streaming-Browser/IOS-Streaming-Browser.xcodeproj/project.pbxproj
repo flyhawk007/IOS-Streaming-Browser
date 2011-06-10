@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1227FD139CF61600D7E0D4 /* DDKeychain.m */; };
 		EC122800139CF89200D7E0D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1227FF139CF89100D7E0D4 /* Security.framework */; };
+		EC26FBE913A1537E000F6266 /* ConfigurationViewControllerIpad.m in Sources */ = {isa = PBXBuildFile; fileRef = EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */; };
+		EC26FBEA13A1537E000F6266 /* ConfigurationViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */; };
 		EC7CC649138161E8001B5D70 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC642138161E8001B5D70 /* DDLog.m */; };
 		EC7CC64A138161E8001B5D70 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC644138161E8001B5D70 /* DDTTYLogger.m */; };
 		EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC646138161E8001B5D70 /* DDASLLogger.m */; };
@@ -57,6 +59,9 @@
 		EC1227FD139CF61600D7E0D4 /* DDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDKeychain.m; sourceTree = "<group>"; };
 		EC1227FF139CF89100D7E0D4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EC26FBB513A0BD89000F6266 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		EC26FBE613A1537D000F6266 /* ConfigurationViewControllerIpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewControllerIpad.h; sourceTree = "<group>"; };
+		EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewControllerIpad.m; sourceTree = "<group>"; };
+		EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigurationViewControllerIpad.xib; sourceTree = "<group>"; };
 		EC7CC641138161E8001B5D70 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
 		EC7CC642138161E8001B5D70 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
 		EC7CC643138161E8001B5D70 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
@@ -292,10 +297,13 @@
 			children = (
 				ECE61AB5137C552D00622B58 /* localhostAddresses.h */,
 				ECE61AB6137C552D00622B58 /* localhostAddresses.m */,
-				ECE0982813806DE600D8AB16 /* IOS_Streaming_BrowserAppDelegate.m */,
 				ECE0982913806DE600D8AB16 /* IOS_Streaming_BrowserAppDelegate.h */,
+				ECE0982813806DE600D8AB16 /* IOS_Streaming_BrowserAppDelegate.m */,
 				ECE0982E13806DFD00D8AB16 /* IOS_Streaming_BrowserViewController.h */,
 				ECE0982C13806DFD00D8AB16 /* IOS_Streaming_BrowserViewController.m */,
+				EC26FBE613A1537D000F6266 /* ConfigurationViewControllerIpad.h */,
+				EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */,
+				EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -351,6 +359,9 @@
 /* Begin PBXProject section */
 		ECE619FE137C3E5F00622B58 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = ECE61A01137C3E5F00622B58 /* Build configuration list for PBXProject "IOS-Streaming-Browser" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -384,6 +395,7 @@
 				ECE61AA9137C4BD000622B58 /* Icon.png in Resources */,
 				ECE61AC4137C5D2200622B58 /* MainWindow.xib in Resources */,
 				ECE098161380168700D8AB16 /* MainWindow_iPad.xib in Resources */,
+				EC26FBEA13A1537E000F6266 /* ConfigurationViewControllerIpad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +446,7 @@
 				EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */,
 				EC7CC64C138161E8001B5D70 /* DDFileLogger.m in Sources */,
 				EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */,
+				EC26FBE913A1537E000F6266 /* ConfigurationViewControllerIpad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +463,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -465,6 +479,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

@@ -27,6 +27,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @synthesize window;
 @synthesize viewController;
+@synthesize navigationController;
 
 /**
     @brief Whether the application did finith launching
@@ -46,9 +47,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
-	
+    
     // Add the view controller's view to the window and display.
-    [window addSubview:viewController.view];
+    //[window addSubview:viewController.view];
+    [window addSubview: navigationController.view];
     [window makeKeyAndVisible];
     
     return YES;
@@ -61,6 +63,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)dealloc
 {  
 	[viewController release];
+    [navigationController release];
 	[window release];
 	[super dealloc];
 }

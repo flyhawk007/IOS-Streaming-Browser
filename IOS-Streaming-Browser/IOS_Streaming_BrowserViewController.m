@@ -12,30 +12,35 @@
 #import "localhostAddresses.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
+#import "ConfigurationViewControllerIpad.h"
+#import "ConfigurationViewController.h"
+
 
 // Log levels: off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 
+
+
 @interface IOS_Streaming_BrowserViewController()
 
 /**
-    @brief Start recording
-    @return void
-**/
+ @brief Start recording
+ @return void
+ **/
 -(void) startRecording;
 
 /**
-    @brief Stop recording
-    @return void
-**/
+ @brief Stop recording
+ @return void
+ **/
 -(void) stopRecording;
 
 /**
-    @brief Take a screen shot
-    @return UIImage
-**/
+ @brief Take a screen shot
+ @return UIImage
+ **/
 -(UIImage*) screenshot;
 
 @end
@@ -44,19 +49,41 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation IOS_Streaming_BrowserViewController
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+    }
+    return self;
+}
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 // Synthesize the getters and setters
-@synthesize startStopButton;
+//@synthesize startStopButton;
 @synthesize webView;
 @synthesize addressBar;
 @synthesize activityIndicator;
 
 
 
+
+
+
+
+
 /**
-    @brief Deallocate the object
-    @return void
-**/
+ @brief Deallocate the object
+ @return void
+ **/
 - (void)dealloc
 {
 
@@ -71,9 +98,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Executed upon the receipt of a memory warning
-    @return void
-**/
+ @brief Executed upon the receipt of a memory warning
+ @return void
+ **/
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -89,9 +116,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    Copied from http://developer.apple.com/library/ios/#qa/qa1703/_index.html , with new imageScale to take Retina-to-320x480 scaling into account
-    @return UIImage
-**/
+ Copied from http://developer.apple.com/library/ios/#qa/qa1703/_index.html , with new imageScale to take Retina-to-320x480 scaling into account
+ @return UIImage
+ **/
 - (UIImage*)screenshot 
 {
     
@@ -174,9 +201,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Gets the path to the document directory
-    @return NSString
-**/
+ @brief Gets the path to the document directory
+ @return NSString
+ **/
 -(NSString*) pathToDocumentsDirectory {
     
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -187,10 +214,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Write the image
-    @param NSTimer
-    @return void
-**/
+ @brief Write the image
+ @param NSTimer
+ @return void
+ **/
 -(void) writeImage: (NSTimer*) _timer {
     
     
@@ -216,13 +243,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Start the HTTP server
-    @return void
-**/
+ @brief Start the HTTP server
+ @return void
+ **/
 -(void) startHttpServer
 {
     NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
-
+    
     
     // Create server using our custom MyHTTPServer class
 	httpServer = [[HTTPServer alloc] init];
@@ -232,14 +259,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	[httpServer setType:@"_http._udp."];
     // 6/8/11: Changed to udp for testing purposes
     // The old value was @"_http._tcp."
-
+    
 	
 	// Normally there's no need to run our server on any specific port.
 	// Technologies like Bonjour allow clients to dynamically discover the server's port at runtime.
 	// However, for easy testing you may want force a certain port so you can just hit the refresh button.
 	[httpServer setPort:12345];
 	
-
+    
     
     [httpServer setConnectionClass:[HTTPConnection class]];
     
@@ -251,15 +278,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 	[httpServer setDocumentRoot:[NSURL fileURLWithPath:root]];
 	[httpServer setDocumentRoot:root];
     
-
-
+    
+    
 	// Start the server (and check for problems)
     NSError *error;
     
     // Try and start the http server
     if(![httpServer start:&error])
     {
-            DDLogError(@"Error starting HTTP Server: %@", error);
+        DDLogError(@"Error starting HTTP Server: %@", error);
     }
     
     // Set the display information for the main browser view to nil because this will be updated with the actual IP address and port once it is obtained from the wireless router
@@ -269,9 +296,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Stop the HTTP server
-    @return void
-**/
+ @brief Stop the HTTP server
+ @return void
+ **/
 -(void) stopHttpServer
 {
     [httpServer stop];
@@ -281,9 +308,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Starts Recording images
-    @return void
-**/
+ @brief Starts Recording images
+ @return void
+ **/
 -(void) startRecording 
 { 
     [self startHttpServer];
@@ -297,9 +324,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Stop recording images
-    @return void
-**/
+ @brief Stop recording images
+ @return void
+ **/
 -(void) stopRecording {
     DDLogError(@"stopRecording");
     [httpServer stop];
@@ -328,24 +355,52 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief The view will appear
-    @param BOOL
-    @return void
-**/
+ @brief The view will appear
+ @param BOOL
+ @return void
+ **/
 - (void) viewWillAppear:(BOOL)animated {
     DDLogError(@"viewWillAppear");
 }
 
 /**
-    @brief Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-    @return void
-**/
+ @brief Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ @return void
+ **/
 - (void)viewDidLoad
 {
     DDLogError(@"viewDidLoad");
-
+    
     
     [super viewDidLoad];
+    
+
+    UIBarButtonItem* configButton = [[UIBarButtonItem alloc] initWithTitle:@"Configure" 
+            style:UIBarButtonItemStylePlain 
+            target:self 
+            action:@selector(configureButton:)];
+ 
+    self.navigationItem.rightBarButtonItem = configButton;
+    [configButton release];
+    
+
+    UIBarButtonItem* startButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Broadcasting" 
+            style:UIBarButtonItemStylePlain 
+            target:self 
+            action:@selector(handleStartStopTapped:)];
+    
+    self.navigationItem.leftBarButtonItem = startButton;
+    [startButton release];
+
+    
+    
+    
+    // create a custom navigation bar button and set it to always say "Back"
+	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+	temporaryBarButtonItem.title = @"Back";
+	self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+	[temporaryBarButtonItem release];
+    
     
     
     // Prevent cookies from being stored in the application
@@ -359,7 +414,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     
 	[localhostAddresses performSelectorInBackground:@selector(list) withObject:nil];
-
+    
     
     
     // Set the defaults web address to load by creating a 
@@ -375,14 +430,22 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
 }
 
+
+
+
+
+
 /**
-    @brief Executed upon the view unloading
-    @return void
-**/
+ @brief Executed upon the view unloading
+ @return void
+ **/
 - (void)viewDidUnload
 {
     DDLogError(@"viewDidUnload");
-  
+    
+
+    
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -391,10 +454,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Whether the screen should autorotate
-    @param UIInterfaceOrientation
-    @return BOOL
-**/
+ @brief Whether the screen should autorotate
+ @param UIInterfaceOrientation
+ @return BOOL
+ **/
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -410,43 +473,82 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Upon the start/stop button being pressed
-    @param id
-    @return IBAction
-**/
+ @brief Upon the start/stop button being pressed
+ @param id
+ @return IBAction
+ **/
 -(IBAction) handleStartStopTapped: (id) sender 
 {
     DDLogError(@"handleStartStopTapped");
     
     
     // stop recording and deselect
-	if (self.startStopButton.selected) { 
+	//if (self.startStopButton.selected) { 
+    if (broadcasting){
 		[self stopRecording];
-
-		self.startStopButton.selected = NO;
         
-        [startStopButton setTitle:@"Start Broadcasting" forState:UIControlStateNormal];
+		//self.startStopButton.selected = NO;
+        
+        broadcasting=NO;
+        
+        //[startStopButton setTitle:@"Start Broadcasting" forState:UIControlStateNormal];
+        
+        self.navigationItem.leftBarButtonItem.title=@"Start Broadcasting";
+    
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        {  
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 106, 30)];
+            [label setFont:[UIFont boldSystemFontOfSize:10.0]];
+            [label setBackgroundColor:[UIColor clearColor]];
+            [label setTextColor:[UIColor whiteColor]];
+            [label setText:@""];
+            [self.navigationController.navigationBar.topItem setTitleView:label];
+            [label release];
+            
+        }else{
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+            [label setFont:[UIFont boldSystemFontOfSize:26.0]];
+            [label setBackgroundColor:[UIColor clearColor]];
+            [label setTextColor:[UIColor whiteColor]];
+            [label setText:@""];
+            [self.navigationController.navigationBar.topItem setTitleView:label];
+            [label release];
+
+        }
+        
+        
+        
+        
+        
+        
 	} else { // start recording and set the button as selected
 		[self startRecording];
-
-		self.startStopButton.selected = YES;
         
-        [startStopButton setTitle:@"Stop Broadcasting" forState:UIControlStateSelected];
+		//self.startStopButton.selected = YES;
+        
+        broadcasting=YES;
+        
+        
+        //[startStopButton setTitle:@"Stop Broadcasting" forState:UIControlStateSelected];
+        
+        
+        self.navigationItem.leftBarButtonItem.title=@"Stop Broadcasting";
 	}
 }
 
 /**
-    @brief Gets the address from the address bar, and updates the webview with the requested URL
-    @param id
-    @return IBAction
-**/
+ @brief Gets the address from the address bar, and updates the webview with the requested URL
+ @param id
+ @return IBAction
+ **/
 -(IBAction)gotoAddress:(id) sender 
 {
     DDLogError(@"gotoAddress");
     
     // Gets the text from the address bar
 	NSURL *url = [NSURL URLWithString:[addressBar text]];
-        
+    
     
     // Creates a request for the URL in the address bar
 	NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:url];
@@ -459,40 +561,60 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Upon the back button being pressed on the webview
-    @param id
-    @return IBAction
-**/
+ @brief Upon the back button being pressed on the webview
+ @param id
+ @return IBAction
+ **/
 -(IBAction) goBack:(id)sender 
 {
     DDLogError(@"goBack");
 	[webView goBack];
 }
 
+
+
+
 /**
-    @brief Upon the configure button being pressed
-    @param id
-    @return IBAction
-**/
+ @brief Upon the configure button being pressed
+ @param id
+ @return IBAction
+ **/
 -(IBAction) configureButton:(id)sender 
 {
     DDLogError(@"configureButton");
     
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
-                                                    message:@"Feature not available in free version"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];	
-    [alert show];
-    [alert release];
+	//UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Note"
+    //                                                message:@"Feature not available in free version"
+    //                                               delegate:nil
+    //                                      cancelButtonTitle:@"OK"
+    //                                      otherButtonTitles:nil];	
+    //[alert show];
+    //[alert release];
+    
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+//    {  
+//        ConfigurationViewController *configViewController = [[ConfigurationViewController alloc]
+//            initWithNibName:@"ConfigurationViewController" bundle:nil];
+//    }else{
+        
+    
+        ConfigurationViewControllerIpad *configViewController = [[ConfigurationViewControllerIpad alloc]
+            initWithNibName:@"ConfigurationViewControllerIpad" bundle:nil]; 
+    
+//    }
+    
+    
+	[[self navigationController] pushViewController:configViewController animated:YES];
+    
+    
 }
 
 
 /**
-    @brief Upon the forward button being pressed on the webview
-    @param id
-    @return IBAction
-**/
+ @brief Upon the forward button being pressed on the webview
+ @param id
+ @return IBAction
+ **/
 -(IBAction) goForward:(id)sender 
 {
     DDLogError(@"goForward");
@@ -501,10 +623,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Upon the reload image beinging pressed on the webview
-    @param id
-    @return IBAction
-**/
+ @brief Upon the reload image beinging pressed on the webview
+ @param id
+ @return IBAction
+ **/
 -(IBAction) reloadPage:(id)sender 
 {
     DDLogError(@"reloadPage");
@@ -513,10 +635,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 /**
-    @brief Upon the stop loading button beinging pressed on the webview
-    @param id
-    @return IBAction
-**/
+ @brief Upon the stop loading button beinging pressed on the webview
+ @param id
+ @return IBAction
+ **/
 -(IBAction) stopLoading:(id)sender 
 {
     DDLogError(@"stopLoading");
@@ -526,10 +648,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Upon the Home button being pressed on the webview
-    @param id
-    @return IBAction
-**/
+ @brief Upon the Home button being pressed on the webview
+ @param id
+ @return IBAction
+ **/
 -(IBAction) goHome:(id)sender {
     DDLogError(@"goHome");
     
@@ -547,12 +669,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Whether should load the request in the UIWebView
-    @param UIWebView
-    @param NSMutableURLRequest
-    @param UIWebViewNavigationType
-    @return BOOL
-**/
+ @brief Whether should load the request in the UIWebView
+ @param UIWebView
+ @param NSMutableURLRequest
+ @param UIWebViewNavigationType
+ @return BOOL
+ **/
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSMutableURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType 
 {
     
@@ -566,12 +688,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         if (([[cookie name] isEqualToString:@"PREF"]) && ([[cookie domain] isEqualToString:@".youtube.com"]))
         {
-        
+            
             DDLogError(@"Cookie before delete: %@", cookie);
             [cookieJar deleteCookie:cookie];
             
             NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithCapacity:4];
-                                               
+            
             [properties setObject:@"PREF" forKey:NSHTTPCookieName];
             [properties setObject:@"f1=50000000&f2=8000000&fms2=30000&fms1=30000" forKey:NSHTTPCookieValue];                                             
             [properties setObject:@".youtube.com" forKey:NSHTTPCookieDomain];
@@ -579,7 +701,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             NSHTTPCookie *myCookie = [NSHTTPCookie cookieWithProperties:properties];
             [cookieJar setCookie:myCookie];
             DDLogError(@"%@", myCookie);
-
+            
         }else if (([[cookie name] isEqualToString:@"PREF"]) && ([[cookie domain] isEqualToString:@".google.com"]))
         {
             
@@ -595,14 +717,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             [properties setObject:[cookie domain] forKey:NSHTTPCookieDomain];
             [properties setObject:[cookie path] forKey:@"Path"];
             NSHTTPCookie *myCookie = [NSHTTPCookie cookieWithProperties:properties];
-                          
+            
             [cookieJar deleteCookie:cookie]; // delete old cookie
             [cookieJar setCookie:myCookie]; // add new cookie
             DDLogError(@"%@", myCookie);
-         
+            
         }
     }
-
+    
     
     
     if(navigationType == UIWebViewNavigationTypeOther){
@@ -634,9 +756,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogError(@"mainDocumentURL:%@",[request mainDocumentURL]);
         DDLogError(@"timeoutInterval:%@",[request timeoutInterval]);
         DDLogError(@"URL: %@",[request URL]);
-
-  
-         
+        
+        
+        
         
         return YES;
     }else if(navigationType == UIWebViewNavigationTypeFormSubmitted){
@@ -662,12 +784,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogError(@"scheme:%@",[URL scheme]);
         DDLogError(@"standardizedURL:%@",[URL standardizedURL]);
         DDLogError(@"user:%@",[URL user]);
-
-
         
         
         
-             
+        
+        
+        
         
         return YES;
         
@@ -681,7 +803,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
     }else if(navigationType == UIWebViewNavigationTypeReload){
         DDLogError(@"user tapped the reload button");
-         return YES;
+        return YES;
     }
     
 	//CAPTURE USER LINK-CLICK.
@@ -709,14 +831,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogError(@"scheme:%@",[URL scheme]);
         DDLogError(@"standardizedURL:%@",[URL standardizedURL]);
         DDLogError(@"user:%@",[URL user]);
-
+        
 		if (([[URL scheme] isEqualToString:@"http"])||([[URL scheme] isEqualToString:@"https"])) 
         {
             
-                [addressBar setText:[URL absoluteString]];
-                DDLogError(@"baseURL is: %@",[URL baseURL]);
-                DDLogError(@"host: %@",[URL host]);
-                [self gotoAddress:nil];
+            [addressBar setText:[URL absoluteString]];
+            DDLogError(@"baseURL is: %@",[URL baseURL]);
+            DDLogError(@"host: %@",[URL host]);
+            [self gotoAddress:nil];
             
 		}else // set the addressbar but dont' return anything to the user
         {	 
@@ -747,17 +869,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     DDLogError(@"scheme:%@",[URL scheme]);
     DDLogError(@"standardizedURL:%@",[URL standardizedURL]);
     DDLogError(@"user:%@",[URL user]);
-
+    
     return NO;
 }
 
 
 
 /**
-    @brief Start the activity indicator when the webview starts loading a webpage
-    @param UIWebView
-    @return void
-**/
+ @brief Start the activity indicator when the webview starts loading a webpage
+ @param UIWebView
+ @return void
+ **/
 - (void)webViewDidStartLoad:(UIWebView *)webView 
 {
     DDLogError(@"webViewDidStartLoad");
@@ -766,23 +888,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Stop the activity indicator when the webview finishes loading the webpage
-    @param UIWebView
-    @return void
-**/
+ @brief Stop the activity indicator when the webview finishes loading the webpage
+ @param UIWebView
+ @return void
+ **/
 - (void)webViewDidFinishLoad:(UIWebView *)webView 
 {
     
-   DDLogError(@"webViewDidFinishLoad");
+    DDLogError(@"webViewDidFinishLoad");
 	[activityIndicator stopAnimating];
 }
 
 /**
-    @brief The webView did load with an error
-    @param UIWebView
-    @param NSError
-    @return void
-**/
+ @brief The webView did load with an error
+ @param UIWebView
+ @param NSError
+ @return void
+ **/
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     DDLogError(@"webView didFailLoadWithError: %@",error);
     
@@ -790,10 +912,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 /**
-    @brief Updates the broadcast ip/port label on the view
-    @param NSNotification
-    @return void
-**/
+ @brief Updates the broadcast ip/port label on the view
+ @param NSNotification
+ @return void
+ **/
 - (void)displayInfoUpdate:(NSNotification *) notification
 {
 	DDLogError(@"displayInfoUpdate:");
@@ -834,5 +956,36 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     
 	displayInfo.text = info;
+    
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+	{  
+
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 106, 30)];
+        [label setFont:[UIFont boldSystemFontOfSize:10.0]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setText:info];
+        [self.navigationController.navigationBar.topItem setTitleView:label];
+        [label release];
+    
+    }else{
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+        [label setFont:[UIFont boldSystemFontOfSize:26.0]];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setText:info];
+        [self.navigationController.navigationBar.topItem setTitleView:label];
+        [label release];
+    
+    }
+
+    
+    //self.navigationItem.title=info;
 }
+
+
+
+
+
 @end
