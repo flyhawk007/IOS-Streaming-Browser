@@ -95,7 +95,7 @@
 								<object class="IBUIWebView" id="923104776">
 									<reference key="NSNextResponder" ref="253961307"/>
 									<int key="NSvFlags">294</int>
-									<string key="NSFrame">{{0, 34}, {768, 972}}</string>
+									<string key="NSFrame">{{0, 44}, {768, 962}}</string>
 									<reference key="NSSuperview" ref="253961307"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView"/>
@@ -152,10 +152,10 @@
 											</object>
 										</object>
 									</object>
-									<string key="NSFrame">{{0, -10}, {768, 44}}</string>
+									<string key="NSFrameSize">{768, 44}</string>
 									<reference key="NSSuperview" ref="253961307"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
+									<reference key="NSNextKeyView" ref="209338482"/>
 									<reference key="IBUIBackgroundColor" ref="39308425"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -432,9 +432,9 @@
 						<reference key="object" ref="253961307"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="510036262"/>
 							<reference ref="923104776"/>
 							<reference ref="1035916030"/>
+							<reference ref="510036262"/>
 						</object>
 						<reference key="parent" ref="578626022"/>
 						<string key="objectName">View</string>
