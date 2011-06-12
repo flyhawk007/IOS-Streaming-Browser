@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = EC1227FD139CF61600D7E0D4 /* DDKeychain.m */; };
 		EC122800139CF89200D7E0D4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC1227FF139CF89100D7E0D4 /* Security.framework */; };
-		EC26FBE913A1537E000F6266 /* ConfigurationViewControllerIpad.m in Sources */ = {isa = PBXBuildFile; fileRef = EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */; };
-		EC26FBEA13A1537E000F6266 /* ConfigurationViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */; };
+		EC26FBE913A1537E000F6266 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC26FBE713A1537D000F6266 /* ConfigurationViewController.m */; };
+		EC26FBEA13A1537E000F6266 /* ConfigurationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC26FBE813A1537E000F6266 /* ConfigurationViewController.xib */; };
 		EC7CC649138161E8001B5D70 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC642138161E8001B5D70 /* DDLog.m */; };
 		EC7CC64A138161E8001B5D70 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC644138161E8001B5D70 /* DDTTYLogger.m */; };
 		EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7CC646138161E8001B5D70 /* DDASLLogger.m */; };
@@ -20,6 +20,7 @@
 		EC7FD8BC13A315FE001903DF /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7FD8BB13A315FE001903DF /* Default-Landscape~ipad.png */; };
 		EC7FD8BF13A318BB001903DF /* iPhoneSplashScreenPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7FD8BD13A318BB001903DF /* iPhoneSplashScreenPortrait.png */; };
 		EC7FD8C013A318BB001903DF /* iPhoneSplashScreenLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = EC7FD8BE13A318BB001903DF /* iPhoneSplashScreenLandscape.png */; };
+		EC7FD8C213A3596B001903DF /* ConfigurationViewControllerIpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC7FD8C113A3596B001903DF /* ConfigurationViewControllerIpad.xib */; };
 		ECA7E4DD137CD6520046380A /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA7E4DC137CD6520046380A /* GCDAsyncSocket.m */; };
 		ECA7E4EB137CD6890046380A /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA7E4E1137CD6890046380A /* HTTPAuthenticationRequest.m */; };
 		ECA7E4EC137CD6890046380A /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = ECA7E4E3137CD6890046380A /* HTTPServer.m */; };
@@ -63,9 +64,9 @@
 		EC1227FD139CF61600D7E0D4 /* DDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDKeychain.m; sourceTree = "<group>"; };
 		EC1227FF139CF89100D7E0D4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EC26FBB513A0BD89000F6266 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		EC26FBE613A1537D000F6266 /* ConfigurationViewControllerIpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewControllerIpad.h; sourceTree = "<group>"; };
-		EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewControllerIpad.m; sourceTree = "<group>"; };
-		EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigurationViewControllerIpad.xib; sourceTree = "<group>"; };
+		EC26FBE613A1537D000F6266 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationViewController.h; sourceTree = "<group>"; };
+		EC26FBE713A1537D000F6266 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationViewController.m; sourceTree = "<group>"; };
+		EC26FBE813A1537E000F6266 /* ConfigurationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigurationViewController.xib; sourceTree = "<group>"; };
 		EC7CC641138161E8001B5D70 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
 		EC7CC642138161E8001B5D70 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
 		EC7CC643138161E8001B5D70 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		EC7FD8BB13A315FE001903DF /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		EC7FD8BD13A318BB001903DF /* iPhoneSplashScreenPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneSplashScreenPortrait.png; sourceTree = "<group>"; };
 		EC7FD8BE13A318BB001903DF /* iPhoneSplashScreenLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneSplashScreenLandscape.png; sourceTree = "<group>"; };
+		EC7FD8C113A3596B001903DF /* ConfigurationViewControllerIpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfigurationViewControllerIpad.xib; sourceTree = "<group>"; };
 		ECA7E4DB137CD6520046380A /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		ECA7E4DC137CD6520046380A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		ECA7E4E0137CD6890046380A /* HTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAuthenticationRequest.h; sourceTree = "<group>"; };
@@ -180,6 +182,13 @@
 				EC7CC648138161E8001B5D70 /* DDFileLogger.m */,
 			);
 			name = Logging;
+			sourceTree = "<group>";
+		};
+		EC7FD90113A37ECA001903DF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		ECA7E4DE137CD6750046380A /* Core */ = {
@@ -293,6 +302,7 @@
 		ECE61A71137C405000622B58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EC7FD90113A37ECA001903DF /* Settings */,
 				ECE61A99137C4BBA00622B58 /* Images */,
 				ECE61A8F137C4B5A00622B58 /* Web */,
 				ECE61AC3137C5D2200622B58 /* MainWindow.xib */,
@@ -310,9 +320,10 @@
 				ECE0982813806DE600D8AB16 /* IOS_Streaming_BrowserAppDelegate.m */,
 				ECE0982E13806DFD00D8AB16 /* IOS_Streaming_BrowserViewController.h */,
 				ECE0982C13806DFD00D8AB16 /* IOS_Streaming_BrowserViewController.m */,
-				EC26FBE613A1537D000F6266 /* ConfigurationViewControllerIpad.h */,
-				EC26FBE713A1537D000F6266 /* ConfigurationViewControllerIpad.m */,
-				EC26FBE813A1537E000F6266 /* ConfigurationViewControllerIpad.xib */,
+				EC26FBE613A1537D000F6266 /* ConfigurationViewController.h */,
+				EC26FBE713A1537D000F6266 /* ConfigurationViewController.m */,
+				EC26FBE813A1537E000F6266 /* ConfigurationViewController.xib */,
+				EC7FD8C113A3596B001903DF /* ConfigurationViewControllerIpad.xib */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -406,12 +417,13 @@
 				ECE61AA9137C4BD000622B58 /* Icon.png in Resources */,
 				ECE61AC4137C5D2200622B58 /* MainWindow.xib in Resources */,
 				ECE098161380168700D8AB16 /* MainWindow_iPad.xib in Resources */,
-				EC26FBEA13A1537E000F6266 /* ConfigurationViewControllerIpad.xib in Resources */,
+				EC26FBEA13A1537E000F6266 /* ConfigurationViewController.xib in Resources */,
 				EC7FD8B813A315DE001903DF /* iPadSplashScreenLandscape.png in Resources */,
 				EC7FD8B913A315DE001903DF /* iPadSplashScreenPortrait.png in Resources */,
 				EC7FD8BC13A315FE001903DF /* Default-Landscape~ipad.png in Resources */,
 				EC7FD8BF13A318BB001903DF /* iPhoneSplashScreenPortrait.png in Resources */,
 				EC7FD8C013A318BB001903DF /* iPhoneSplashScreenLandscape.png in Resources */,
+				EC7FD8C213A3596B001903DF /* ConfigurationViewControllerIpad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +474,7 @@
 				EC7CC64B138161E8001B5D70 /* DDASLLogger.m in Sources */,
 				EC7CC64C138161E8001B5D70 /* DDFileLogger.m in Sources */,
 				EC1227FE139CF61600D7E0D4 /* DDKeychain.m in Sources */,
-				EC26FBE913A1537E000F6266 /* ConfigurationViewControllerIpad.m in Sources */,
+				EC26FBE913A1537E000F6266 /* ConfigurationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

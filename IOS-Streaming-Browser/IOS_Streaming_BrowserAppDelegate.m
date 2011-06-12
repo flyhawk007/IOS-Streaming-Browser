@@ -29,6 +29,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @synthesize viewController;
 @synthesize navigationController;
 
+
 /**
     @brief Whether the application did finith launching
     @param UIApplication
@@ -38,6 +39,40 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
  
+    /////////////////////////////////////////////
+    // Set default values
+    ////////////////////////////////////////////
+    
+    // initialize defaults
+    NSString *dateKey    = @"dateKey";
+    NSDate *lastRead    = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:dateKey];
+    
+    if (lastRead == nil)     // App first run: set up user defaults.
+    {
+        
+         NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], dateKey, nil];
+        
+        // do any other initialization you want to do here - e.g. the starting default values.    
+        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"rotate"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"frames"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"scale"];
+        
+        // sync the defaults to disk
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:dateKey];
+    
+    
+    
+    /////////////////////////////////////////
+    // End of user defaults initialization
+    /////////////////////////////////////////
+    
+    
+    
+    
     // Configure our logging framework.
 	// To keep things simple and fast, we're just going to log to the Xcode console.
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];

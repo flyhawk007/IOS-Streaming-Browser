@@ -2317,6 +2317,29 @@ static NSMutableArray *recentNonces;
             DDLogError(@"path is not just a slash");
         }
         
+        NSInteger fps;
+        NSInteger tempfps= [[[NSUserDefaults standardUserDefaults] objectForKey:@"frames"]intValue];
+        switch (tempfps) {
+            case 0:
+                fps=1000;
+                break;
+            case 1:
+                fps=5000;
+                break;
+            case 2:
+                fps=10000;
+                break;
+            case 3:
+                fps=15000;
+                break;
+            case 4:
+                fps=20000;
+                break;    
+            default:
+                fps=5000;
+                break;
+        }
+        
         // Create a mutable string to hold the data being sent to the host
         NSMutableString *outdata = [NSMutableString new];
         
@@ -2326,11 +2349,15 @@ static NSMutableArray *recentNonces;
         [outdata appendString:@"function refreshIt() {\n"];
         [outdata appendString:@"if (!document.images) return;\n"];
         [outdata appendString:@"document.images['myImage'].src = '1.png?' + Math.random();\n"];
-        [outdata appendString:@"setTimeout('refreshIt()',1000);\n"];
+        [outdata appendString:@"setTimeout('refreshIt()',"];
+        [outdata appendString:[NSString stringWithFormat:@"%d",fps]];
+         [outdata appendString:@");\n"];
         [outdata appendString:@"}\n"];
         [outdata appendString:@"//--></script>\n"];
         [outdata appendString:@"</head>\n"];
-        [outdata appendString:@"<body onLoad=\" setTimeout('refreshIt()',1000)\">\n"];
+         [outdata appendString:@"<body onLoad=\" setTimeout('refreshIt()',"];
+         [outdata appendString:[NSString stringWithFormat:@"%d",fps]];
+         [outdata appendString:@")\">\n"];
         [outdata appendString:@"<img src=\"1.png\" name=\"myImage\">\n"];
         [outdata appendString:@"</body>\n"];
         [outdata appendString:@"</html>\n"];

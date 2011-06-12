@@ -12,24 +12,12 @@
 #import "localhostAddresses.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
-#import "ConfigurationViewControllerIpad.h"
+#import "ConfigurationViewController.h"
 
 
 
 // Log levels: off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
-
-
-static CGRect swapWidthAndHeight(CGRect rect)
-{
-    CGFloat  swap = rect.size.width;
-    
-    rect.size.width  = rect.size.height;
-    rect.size.height = swap;
-    
-    return rect;
-}
-
 
 
 @interface IOS_Streaming_BrowserViewController()
@@ -142,8 +130,36 @@ static CGRect swapWidthAndHeight(CGRect rect)
     // For image rotation
     CGAffineTransform  tran = CGAffineTransformIdentity;
     
-    CGRect bnds = CGRectZero;
     CGRect rect = CGRectZero;
+    
+    float scale;
+    NSInteger tempscale= [[[NSUserDefaults standardUserDefaults] objectForKey:@"scale"]intValue];
+    
+    switch (tempscale) {
+        case 0:
+            scale=.50;
+            break;
+        case 1:
+            scale=.75;
+            break;
+        case 2:
+            scale=1;
+            break;
+        case 3:
+            scale=1.25;
+            break;
+        case 4:
+            scale=1.50;
+            break;    
+        default:
+            scale=1;
+            break;
+    }
+
+    
+    CGFloat imageScale;
+    
+    
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{  
@@ -156,7 +172,15 @@ static CGRect swapWidthAndHeight(CGRect rect)
             
             rect.size.width=768.0;
             rect.size.height=1024.0;
-
+            
+            imageScale = imageSize.width / 768; 
+            
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+            }
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ){
 
@@ -166,6 +190,20 @@ static CGRect swapWidthAndHeight(CGRect rect)
             rect.size.width=768.0;
             rect.size.height=1024.0;
 
+            imageScale = imageSize.width / 768;
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                tran = CGAffineTransformMakeTranslation(rect.size.width,
+                                                        rect.size.height);
+                tran = CGAffineTransformRotate(tran, M_PI);
+                
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+                tran = CGAffineTransformMakeTranslation(rect.size.width,
+                                                        rect.size.height);
+                tran = CGAffineTransformRotate(tran, M_PI);
+            }
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ){
             
@@ -174,7 +212,23 @@ static CGRect swapWidthAndHeight(CGRect rect)
             
             rect.size.width=1024.0;
             rect.size.height=768.0;
-  
+
+            imageScale = imageSize.width / 1024;
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
+                // Rotate 90 degrees
+                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+                
+            }else{
+                
+                UIGraphicsBeginImageContext(imageSize);
+                tran = CGAffineTransformMakeTranslation(rect.size.width,0.0);
+                // Rotate 90 degrees
+                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+            }
+            
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight ){
             
@@ -183,7 +237,22 @@ static CGRect swapWidthAndHeight(CGRect rect)
             
             rect.size.width=1024.0;
             rect.size.height=768.0;
+            
+            imageScale = imageSize.width / 1024;
 
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                tran = CGAffineTransformMakeTranslation(0.0, 768);
+                
+                // Rotate 270 degrees
+                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+                tran = CGAffineTransformMakeTranslation(0.0, 768);
+                // Rotate 270 degrees
+                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+            }
         }            
         
     }else{
@@ -195,6 +264,14 @@ static CGRect swapWidthAndHeight(CGRect rect)
             imageSize.height=480.0;
             rect.size.width=320.0;
             rect.size.height=480.0;
+            imageScale = imageSize.width / 320*scale;
+            
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+            }
 
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ){
@@ -203,6 +280,23 @@ static CGRect swapWidthAndHeight(CGRect rect)
             imageSize.height=480.0;
             rect.size.width=320.0;
             rect.size.height=480.0;
+            imageScale = imageSize.width / 320*scale;
+            
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                tran = CGAffineTransformMakeTranslation(rect.size.width,
+                                                        rect.size.height);
+                tran = CGAffineTransformRotate(tran, M_PI);
+                
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                
+                tran = CGAffineTransformMakeTranslation(rect.size.width,
+                                                        rect.size.height);
+                tran = CGAffineTransformRotate(tran, M_PI);
+            }
 
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ){
@@ -211,7 +305,21 @@ static CGRect swapWidthAndHeight(CGRect rect)
             imageSize.height=320.0;
             rect.size.width=480.0;
             rect.size.height=320.0;
+            imageScale = imageSize.width / 480*scale;
 
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                
+                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
+                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+                
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+                
+                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
+                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+            }
 
         }
         if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight ){
@@ -220,173 +328,26 @@ static CGRect swapWidthAndHeight(CGRect rect)
             imageSize.height=320.0;
             rect.size.width=480.0;
             rect.size.height=320.0;
+            imageScale = imageSize.width / 480*scale;
+            
+            if (NULL != UIGraphicsBeginImageContextWithOptions)
+            {
+                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
+                                
+                tran = CGAffineTransformMakeTranslation(0.0, 320);
+                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+            }else{
+                UIGraphicsBeginImageContext(imageSize);
+                
+                tran = CGAffineTransformMakeTranslation(0.0, 320);
+                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+                
+            }
+
         }     
     }
     
-    bnds = rect;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{  
-        //DETERMINE ORIENTATION
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait ){
-            
-            
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 768; // 1 to 1 scale
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-            }
-        }
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ){
-            
-            
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 768; // 1 to 1 scale
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-                tran = CGAffineTransformMakeTranslation(rect.size.width,
-                                                        rect.size.height);
-                tran = CGAffineTransformRotate(tran, M_PI);
-                
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-                tran = CGAffineTransformMakeTranslation(rect.size.width,
-                                                        rect.size.height);
-                tran = CGAffineTransformRotate(tran, M_PI);
-                
-            }
-
-        }
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ){
-            
-            
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 2024; 
-            
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
-                // Rotate 90 degrees
-                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
-        
-            }else{
-                
-                UIGraphicsBeginImageContext(imageSize);
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(rect.size.width,0.0);
-                // Rotate 90 degrees
-                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
-            }
-        }
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight ){
-            
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 2024; 
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-                
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(0.0, 768);
-                
-                // Rotate 270 degrees
-                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(0.0, 768);
-                // Rotate 270 degrees
-                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
-            }
-        } 
-        
-    }else{
-        
-        //DETERMINE ORIENTATION
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait ){
-
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 200;
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-            }
-        }
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown ){
-
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 200;
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-          
-                tran = CGAffineTransformMakeTranslation(rect.size.width,
-                                                        rect.size.height);
-                tran = CGAffineTransformRotate(tran, M_PI);
-                
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-           
-                tran = CGAffineTransformMakeTranslation(rect.size.width,
-                                                        rect.size.height);
-                tran = CGAffineTransformRotate(tran, M_PI);
-            }
-        }
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ){
-            
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 400;
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-          
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
-                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
-                
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-         
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
-                tran = CGAffineTransformRotate(tran, M_PI / 2.0);
-            }
-        }
-        
-        if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight ){
-
-            // Set the image scale
-            CGFloat imageScale = imageSize.width / 400;
-            if (NULL != UIGraphicsBeginImageContextWithOptions)
-            {
-                UIGraphicsBeginImageContextWithOptions(imageSize, NO, imageScale);
-           
-                bnds = swapWidthAndHeight(bnds);
-                
-                tran = CGAffineTransformMakeTranslation(0.0, 320);
-                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
-            }else{
-                UIGraphicsBeginImageContext(imageSize);
-           
-                bnds = swapWidthAndHeight(bnds);
-                tran = CGAffineTransformMakeTranslation(0.0, 320);
-                tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
-                
-            }
-        }
-    }
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
-        
     CGContextConcatCTM(context, tran);
 
     
@@ -424,11 +385,7 @@ static CGRect swapWidthAndHeight(CGRect rect)
     // Retrieve the screenshot image
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	
-    
     UIGraphicsEndImageContext();
-	
-    
-  
 
     return image;
     
@@ -656,9 +613,9 @@ static CGRect swapWidthAndHeight(CGRect rect)
     
     // Adds an observer to the local notification center to call the
     // displayInfoUpdate method once the local host is resolved
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayInfoUpdate:) name:@"LocalhostAdressesResolved" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayInfoUpdate:) name:@"LocalhostAddressesResolved" object:nil];
     
-    
+    // Tries to determine the local host address in a background thread and will receive notification once it is resolved
 	[localhostAddresses performSelectorInBackground:@selector(list) withObject:nil];
     
     
@@ -711,7 +668,11 @@ static CGRect swapWidthAndHeight(CGRect rect)
 {
     // Return YES for supported orientations
     
-    return YES;
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"rotate"];
+
+    
+    
+    
 }
 
 
@@ -846,14 +807,26 @@ static CGRect swapWidthAndHeight(CGRect rect)
 //            initWithNibName:@"ConfigurationViewController" bundle:nil];
 //    }else{
         
-    
-        ConfigurationViewControllerIpad *configViewController = [[ConfigurationViewControllerIpad alloc]
-            initWithNibName:@"ConfigurationViewControllerIpad" bundle:nil]; 
-    
 //    }
+
+   
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{ 
     
     
-	[[self navigationController] pushViewController:configViewController animated:YES];
+        ConfigurationViewController *configViewController = [[ConfigurationViewController alloc]
+            initWithNibName:@"ConfigurationViewControllerIpad" bundle:nil]; 
+            [[self navigationController] pushViewController:configViewController animated:YES];
+
+    }else{
+        
+        ConfigurationViewController *configViewController = [[ConfigurationViewController alloc]
+            initWithNibName:@"ConfigurationViewController" bundle:nil]; 
+            [[self navigationController] pushViewController:configViewController animated:YES];
+    }
+    
+	
     
     
 }

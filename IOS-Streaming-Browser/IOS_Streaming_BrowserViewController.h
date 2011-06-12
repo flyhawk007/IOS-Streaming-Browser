@@ -92,7 +92,7 @@
         
 }
     
-    //@property (nonatomic, retain) IBOutlet UIButton *startStopButton;
+  
     @property(nonatomic,retain) UIWebView *webView;
     @property(nonatomic,retain) UITextField *addressBar;
     @property(nonatomic,retain) UIActivityIndicatorView *activityIndicator;

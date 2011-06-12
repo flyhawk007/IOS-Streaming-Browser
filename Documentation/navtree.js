@@ -4,6 +4,7 @@ var NAVTREE =
     [ "IOS Steaming Browser Index Page", "index.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "_DDRange", "struct__DDRange.html", null ],
+      [ "ConfigurationViewController", "interfaceConfigurationViewController.html", null ],
       [ "DDAbstractLogger", "interfaceDDAbstractLogger.html", null ],
       [ "DDASLLogger", "interfaceDDASLLogger.html", null ],
       [ "DDFileLogger", "interfaceDDFileLogger.html", null ],
@@ -46,6 +47,7 @@ var NAVTREE =
     [ "Data Structure Index", "classes.html", null ],
     [ "Class Hierarchy", "hierarchy.html", [
       [ "_DDRange", "struct__DDRange.html", null ],
+      [ "ConfigurationViewController", "interfaceConfigurationViewController.html", null ],
       [ "DDKeychain", "interfaceDDKeychain.html", null ],
       [ "DDLog", "interfaceDDLog.html", null ],
       [ "DDLogFileInfo", "interfaceDDLogFileInfo.html", null ],
@@ -96,6 +98,8 @@ var NAVTREE =
     ] ],
     [ "Data Fields", "functions.html", null ],
     [ "File List", "files.html", [
+      [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/ConfigurationViewController.h", null, null ],
+      [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/ConfigurationViewController.m", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDASLLogger.h", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDASLLogger.m", null, null ],
       [ "/Users/willrubel/IOS-Streaming-Browser/IOS-Streaming-Browser/DDData.h", null, null ],

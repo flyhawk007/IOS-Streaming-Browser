@@ -32,12 +32,14 @@
         @brief The view controller for the views
     **/
 	IOS_Streaming_BrowserViewController *viewController;
-
+    
+  
 
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet IOS_Streaming_BrowserViewController *viewController;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+
 
 @end
