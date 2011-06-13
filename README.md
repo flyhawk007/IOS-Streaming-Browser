@@ -12,3 +12,4 @@ Status of development
 
 6/5/11 - Continuing commenting files and added doxygen documentation
 6/9/11 - Added auto rotation for the screen views
+6/12/11 - Added configuration for user preferences
