@@ -51,7 +51,6 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="1012359156">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -196,7 +195,6 @@
 									<string key="NSFrame">{{0, 88}, {320, 382}}</string>
 									<reference key="NSSuperview" ref="1066788798"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<reference key="IBUIBackgroundColor" ref="1012359156"/>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIDataDetectorTypes">1</int>
@@ -204,7 +202,7 @@
 								</object>
 								<object class="IBUIActivityIndicatorView" id="239918060">
 									<reference key="NSNextResponder" ref="1066788798"/>
-									<int key="NSvFlags">293</int>
+									<int key="NSvFlags">289</int>
 									<string key="NSFrame">{{224, 58}, {20, 20}}</string>
 									<reference key="NSSuperview" ref="1066788798"/>
 									<reference key="NSWindow"/>

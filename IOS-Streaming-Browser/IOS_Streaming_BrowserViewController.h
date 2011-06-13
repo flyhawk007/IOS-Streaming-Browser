@@ -16,6 +16,7 @@
 
 /**
     @brief The UIWebView delegate
+ 
     The UIWebViewDelegate is telling the app that this class will be the delegate for our UIWebview.  
 **/
 @interface IOS_Streaming_BrowserViewController : UIViewController <UIWebViewDelegate> {
@@ -73,11 +74,7 @@
     **/
     IBOutlet UIActivityIndicatorView *activityIndicator;
         
-    /**
-        @brief The ip address and port of the http server which is displayed on the view of the xib file
-    **/
-    IBOutlet UILabel *displayInfo;
-        
+   
     /**
         @brief Dictionary containing the search addresses
     **/
@@ -88,6 +85,10 @@
     **/
     HTTPServer *httpServer;
     
+    
+    /**
+        @brief Whether broadcasting the display
+    **/
     BOOL broadcasting; 
         
 }
@@ -100,56 +101,56 @@
     
     
     /**
-     @param NSNotification
-     @return void
+        @param NSNotification
+        @return void
      **/
     - (void)displayInfoUpdate:(NSNotification *) notification;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) handleStartStopTapped: (id) sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) gotoAddress:(id)sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) goBack:(id)sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) goForward:(id)sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) goHome:(id)sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) reloadPage:(id)sender;
     
     /**
-     @param id
-     @return IBAction
+        @param id
+        @return IBAction
      **/
     -(IBAction) stopLoading:(id)sender;
     
     /**
-     @param id
-     @returns IBAction
+        @param id
+        @returns IBAction
      **/
     -(IBAction) configureButton:(id)sender;
     

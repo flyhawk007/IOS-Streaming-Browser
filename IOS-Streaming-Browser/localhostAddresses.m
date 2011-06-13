@@ -34,6 +34,10 @@
 **/
 + (void)list
 {
+    
+    NSLog(@"list method");
+    
+    
     // An autorelease pool stores objects that are sent a release 
     // message when the pool itself is drained.
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
@@ -41,7 +45,7 @@
     
 	NSMutableDictionary* result = [NSMutableDictionary dictionary];
     
-    // Creates an ifaddrs structure
+    // Creates an internet family address structure
 	struct ifaddrs*	addrs;
     
     //function creates a linked list of structures describing the
@@ -81,6 +85,8 @@
 						[ip appendFormat:@"."];
                     }
                     
+                    //DDLogError(@"ip: %d",base[i]);
+                    
 					[ip appendFormat:@"%d", base[i]];
 				}
                 
@@ -93,8 +99,18 @@
 		freeifaddrs(addrs);
 	}
     
+    ////////////////////////////////////////////////////////////////////
+    // Implement if you want external checking of IP address
+    //NSURL *netIPURL = [NSURL URLWithString:@"http://whatismyip.org"];
+    //NSString *netIP = [NSString stringWithContentsOfURL:netIPURL encoding:NSUTF8StringEncoding error:nil];
+    //if (netIP)
+    //    [result setObject:netIP forKey:@"www"];
+    
+    
+    NSLog(@"result: %@",result);
+    
     // Post a notification to the default notification center that the local host address has been resolved
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"LocalhostAdressesResolved" object:result];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"LocalhostAddressesResolved" object:result];
 
 	[pool release];
 }
