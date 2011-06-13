@@ -1053,13 +1053,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSString *info;
     
+    
 	if(notification)
 	{
                
-		[addresses release];
+		[addresses release]; // releases old addresses
 		addresses = [[notification object] copy];
-
-
 	}
     
     // Return if the notification doesn't contain an address
@@ -1093,7 +1092,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // If there is still no local IP
 	if (!localIP)
     {
-        DDLogError(@"Still no local IP");
 		info = @"Wifi: No Connection!\n";
         
          

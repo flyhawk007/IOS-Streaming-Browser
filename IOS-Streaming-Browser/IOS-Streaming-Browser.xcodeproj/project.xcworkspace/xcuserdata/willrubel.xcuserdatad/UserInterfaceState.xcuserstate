@@ -411,7 +411,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>45</integer>
+					<integer>47</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -1601,7 +1601,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>26</integer>
+					<integer>54</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -2347,9 +2347,9 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>329627615.467834</real>
-		<string>{34036, 368}</string>
-		<string>{34218, 0}</string>
+		<real>329630140.29299301</real>
+		<string>{34169, 976}</string>
+		<string>{33709, 9}</string>
 		<string>-displayInfoUpdate:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
@@ -2393,7 +2393,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {628, 307}}</string>
+		<string>{{0, 0}, {628, 489}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -14714,9 +14714,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>329627615.46398801</real>
-		<string>{34036, 368}</string>
-		<string>{34218, 0}</string>
+		<real>329630140.28722101</real>
+		<string>{34169, 976}</string>
+		<string>{33709, 9}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16964,9 +16964,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>329626561.59397203</real>
-		<string>{2250, 512}</string>
-		<string>{2529, 11}</string>
+		<real>329630139.93617398</real>
+		<string>{1177, 947}</string>
+		<string>{2046, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -30107,8 +30107,8 @@
 		</dict>
 		<string>IDEDeviceLocation</string>
 		<string>IDEDeviceArchitecture</string>
-		<string>dvtdevice-iphone:c7541a39bbf9590a683f15c45c87acf57578afcb</string>
-		<string>armv7</string>
+		<string>dvtdevice-iphonesimulator:/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk-iPad</string>
+		<string>i386</string>
 		<dict>
 			<key>$class</key>
 			<dict>

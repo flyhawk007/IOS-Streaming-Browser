@@ -76,7 +76,7 @@
         
    
     /**
-        @brief Dictionary containing the search addresses
+        @brief Dictionary containing the local host and other interface addresses
     **/
     NSDictionary *addresses;
         
